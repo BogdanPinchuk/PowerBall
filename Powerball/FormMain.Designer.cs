@@ -45,6 +45,7 @@ namespace Powerball
             this.menuMain = new System.Windows.Forms.MenuStrip();
             this.newGameMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.statusMain = new System.Windows.Forms.StatusStrip();
+            this.statusLabelInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBoxBR = new System.Windows.Forms.GroupBox();
             this.groupBoxBegin = new System.Windows.Forms.GroupBox();
             this.buttonBG = new System.Windows.Forms.Button();
@@ -90,6 +91,7 @@ namespace Powerball
             this.comboBoxPBW2 = new System.Windows.Forms.ComboBox();
             this.comboBoxPBW1 = new System.Windows.Forms.ComboBox();
             this.menuMain.SuspendLayout();
+            this.statusMain.SuspendLayout();
             this.groupBoxBR.SuspendLayout();
             this.groupBoxBegin.SuspendLayout();
             this.groupBoxMoney.SuspendLayout();
@@ -123,11 +125,19 @@ namespace Powerball
             // 
             // statusMain
             // 
+            this.statusMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusLabelInfo});
             this.statusMain.Location = new System.Drawing.Point(3, 508);
             this.statusMain.Name = "statusMain";
             this.statusMain.Size = new System.Drawing.Size(908, 22);
             this.statusMain.TabIndex = 1;
             this.statusMain.Text = "statusStrip1";
+            // 
+            // statusLabelInfo
+            // 
+            this.statusLabelInfo.Name = "statusLabelInfo";
+            this.statusLabelInfo.Size = new System.Drawing.Size(28, 17);
+            this.statusLabelInfo.Text = "Info";
             // 
             // groupBoxBR
             // 
@@ -564,6 +574,7 @@ namespace Powerball
             this.buttonAG.TabIndex = 9;
             this.buttonAG.Text = "Auto generation";
             this.buttonAG.UseVisualStyleBackColor = true;
+            this.buttonAG.Click += new System.EventHandler(this.ButtonAG_Click);
             // 
             // label1
             // 
@@ -609,15 +620,15 @@ namespace Powerball
             this.comboBoxPBR1.FormattingEnabled = true;
             this.comboBoxPBR1.IntegralHeight = false;
             this.comboBoxPBR1.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09",
             "10",
             "11",
             "12",
@@ -649,15 +660,15 @@ namespace Powerball
             this.comboBoxPBW5.FormattingEnabled = true;
             this.comboBoxPBW5.IntegralHeight = false;
             this.comboBoxPBW5.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09",
             "10",
             "11",
             "12",
@@ -732,15 +743,15 @@ namespace Powerball
             this.comboBoxPBW4.FormattingEnabled = true;
             this.comboBoxPBW4.IntegralHeight = false;
             this.comboBoxPBW4.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09",
             "10",
             "11",
             "12",
@@ -815,15 +826,15 @@ namespace Powerball
             this.comboBoxPBW3.FormattingEnabled = true;
             this.comboBoxPBW3.IntegralHeight = false;
             this.comboBoxPBW3.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09",
             "10",
             "11",
             "12",
@@ -898,15 +909,15 @@ namespace Powerball
             this.comboBoxPBW2.FormattingEnabled = true;
             this.comboBoxPBW2.IntegralHeight = false;
             this.comboBoxPBW2.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09",
             "10",
             "11",
             "12",
@@ -982,15 +993,15 @@ namespace Powerball
             this.comboBoxPBW1.IntegralHeight = false;
             this.comboBoxPBW1.ItemHeight = 28;
             this.comboBoxPBW1.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09",
             "10",
             "11",
             "12",
@@ -1074,9 +1085,11 @@ namespace Powerball
             this.MainMenuStrip = this.menuMain;
             this.Name = "FormMain";
             this.Padding = new System.Windows.Forms.Padding(3);
-            this.Text = "PowerBall";
+            this.Text = "PowerBallLogic";
             this.menuMain.ResumeLayout(false);
             this.menuMain.PerformLayout();
+            this.statusMain.ResumeLayout(false);
+            this.statusMain.PerformLayout();
             this.groupBoxBR.ResumeLayout(false);
             this.groupBoxBR.PerformLayout();
             this.groupBoxBegin.ResumeLayout(false);
@@ -1151,6 +1164,7 @@ namespace Powerball
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.ToolStripStatusLabel statusLabelInfo;
     }
 }
 

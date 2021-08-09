@@ -7,8 +7,99 @@ namespace GameLogic
     /// <summary>
     /// Base logic of power ball
     /// </summary>
-    public class PowerBall
+    public class PowerBallLogic
     {
+        /// <summary>
+        /// Numner of maximum value for white balls
+        /// </summary>
+        private int maxOfWhite;
+        /// <summary>
+        /// Numner of maximum value for red balls
+        /// </summary>
+        private int maxOfRed;
+        ///// <summary>
+        ///// Array values for white balls
+        ///// </summary>
+        //private List<int> arrayValueForWhiteBall;
+        ///// <summary>
+        ///// Array values for red balls
+        ///// </summary>
+        //private List<int> arrayValueForRedBall;
+
+
+        /// <summary>
+        /// Max value of white balls
+        /// </summary>
+        public int MaxOfWhite
+        {
+            get { return maxOfWhite; }
+            set
+            {
+                if (1 < value)
+                {
+                    maxOfWhite = value;
+                }
+                else
+                {
+                    new Exception("Error of input value for max value white balls");
+                }
+            }
+        }
+        /// <summary>
+        /// Max value of red ball
+        /// </summary>
+        public int MaxOfRed
+        {
+            get { return maxOfRed; }
+            set
+            {
+                if (1 < value)
+                {
+                    maxOfRed = value;
+                }
+                else
+                {
+                    new Exception("Error of input value for max value red ball");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Get sorted values for white balls
+        /// </summary>
+        private List<int> GetSortArrayForWhiteBall
+            => GetSortArray(MaxOfWhite);
+        /// <summary>
+        /// Get sorted values for red balls
+        /// </summary>
+        private List<int> GetSortArrayForRedBall
+            => GetSortArray(MaxOfRed);
+
+        public PowerBallLogic()
+        {
+
+        }
+
+        /// <summary>
+        /// Create constructor with limitation
+        /// </summary>
+        /// <param name="maxOfWhite">max value for white balls</param>
+        /// <param name="maxOfRed">max value for red ball</param>
+        public PowerBallLogic(int maxOfWhite, int maxOfRed)
+        {
+            this.maxOfWhite = maxOfWhite;
+            this.maxOfRed = maxOfRed;
+        }
+
+        /// <summary>
+        /// Get sorted array of integer values for balls
+        /// </summary>
+        /// <param name="number">max value of balls</param>
+        /// <returns></returns>
+        private List<int> GetSortArray(int number)
+            => Enumerable.Range(1, number + 1).ToList();
+        
+        public Dictionary<List<int>, int> Get
 
     }
 

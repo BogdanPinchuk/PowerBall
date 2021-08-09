@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GameLogic;
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,18 +15,32 @@ namespace Powerball
     public partial class FormMain : Form
     {
         /// <summary>
-        /// Cost when customer want/ don`t want use Power Play
+        /// Cost when customer don`t want use Power Play
         /// </summary>
         private int costWithOutPP = 2;
+        /// <summary>
+        /// Cost when customer want use Power Play
+        /// </summary>
         private int costWithPP = 3;
         /// <summary>
         /// Numner of maximum value for white balls
         /// </summary>
-        private int maxOfWhite = 69;
+        private static int maxOfWhite = 69;
         /// <summary>
         /// Numner of maximum value for red balls
         /// </summary>
-        private int maxOfRed = 26;
+        private static int maxOfRed = 26;
+        /// <summary>
+        /// Max values for power play game when we can use 10x multiplier
+        /// </summary>
+        private static long maxMoneyForPP = 150_000_000;
+
+
+        /// <summary>
+        /// Base logig of game
+        /// </summary>
+        private PowerBallLogic powerBall = new(maxOfWhite, maxOfRed);
+
 
         #region Properties for future logic (price of titcket)
         /// <summary>
@@ -59,7 +75,11 @@ namespace Powerball
         private void ButtonBG_Click(object sender, EventArgs e)
         {
             // lock of base money data
-            groupBoxBR.Enabled = false;
+            //groupBoxBR.Enabled = false;
+            textBoxJ.ReadOnly = true;
+            textBoxM.ReadOnly = true;
+            groupBoxBegin.Enabled = false;
+
             // unlock of game
             groupBoxPD.Enabled = true;
             groupBoxRT.Enabled = true;
@@ -95,7 +115,11 @@ namespace Powerball
         private void NewGameMenu_Click(object sender, EventArgs e)
         {
             // unlock of base money data
-            groupBoxBR.Enabled = true;
+            //groupBoxBR.Enabled = true;
+            textBoxJ.ReadOnly = false;
+            textBoxM.ReadOnly = false;
+            groupBoxBegin.Enabled = true;
+
             // lock of game
             groupBoxPD.Enabled = false;
             groupBoxRT.Enabled = false;
@@ -231,5 +255,14 @@ namespace Powerball
             }
         }
 
+        /// <summary>
+        /// Autocomplate values for tickets
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonAG_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
