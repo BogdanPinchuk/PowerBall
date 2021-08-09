@@ -58,11 +58,33 @@ namespace Powerball
         /// <param name="e"></param>
         private void ButtonBG_Click(object sender, EventArgs e)
         {
-            // blocked of base money data
+            // lock of base money data
             groupBoxBR.Enabled = false;
-            // unblocked of game
+            // unlock of game
             groupBoxPD.Enabled = true;
             groupBoxRT.Enabled = true;
+
+            // clear textbox
+            ClearTextBoxOfLotеery();
+        }
+
+        /// <summary>
+        /// Clear textboxes for present wins variants of lottery
+        /// </summary>
+        private void ClearTextBoxOfLotеery()
+        {
+            // white balls
+            textBoxPBW1.Text = string.Empty;
+            textBoxPBW2.Text = string.Empty;
+            textBoxPBW3.Text = string.Empty;
+            textBoxPBW4.Text = string.Empty;
+            textBoxPBW5.Text = string.Empty;
+
+            // red ball
+            textBoxPBR1.Text = string.Empty;
+
+            // power play
+            textBoxPP1.Text = string.Empty;
         }
 
         /// <summary>
@@ -72,9 +94,9 @@ namespace Powerball
         /// <param name="e"></param>
         private void NewGameMenu_Click(object sender, EventArgs e)
         {
-            // unblocked of base money data
+            // unlock of base money data
             groupBoxBR.Enabled = true;
-            // blocked of game
+            // lock of game
             groupBoxPD.Enabled = false;
             groupBoxRT.Enabled = false;
         }
@@ -107,11 +129,17 @@ namespace Powerball
             {
                 // TODO: Clear of table
 
+                // block ability buy ticket
+                groupBoxT.Enabled = false;
+
                 buttonS.Text = "Next";
             }
             else
             {
                 // TODO: Calc winnings
+
+                // unlock ability buy ticket
+                groupBoxT.Enabled = true;
 
                 buttonS.Text = "Start";
             }
@@ -138,7 +166,7 @@ namespace Powerball
         {
             if (e.KeyChar == ((char)Keys.Enter))
             {
-                
+
             }
 
         }
@@ -148,9 +176,60 @@ namespace Powerball
             //MessageBox.Show("changed");
         }
 
-        private void comboBoxPBW1_TextUpdate(object sender, EventArgs e)
+        private void ComboBoxPBW1_TextUpdate(object sender, EventArgs e)
         {
             //MessageBox.Show("changed 2");
         }
+
+        /// <summary>
+        /// Validate input data for jackpot
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TextBoxJ_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidateInputMoney(textBoxJ, 20_000_000, e);
+        }
+
+        /// <summary>
+        /// Validate input data for money of gamer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TextBoxM_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidateInputMoney(textBoxM, 2, e);
+        }
+
+        /// <summary>
+        /// Validate input data
+        /// </summary>
+        /// <param name="tb">element of form where input some money</param>
+        /// <param name="money">amount of money</param>
+        /// <param name="e">keys of keyboard</param>
+        private void ValidateInputMoney(TextBox tb, long money, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ((char)Keys.Enter))
+            {
+                // check correct input data
+                bool correct = long.TryParse(tb.Text, out long result);
+
+                tb.Text = (correct && result >= money) ? result.ToString() : money.ToString();
+
+                #region first variant
+                /*
+                        if (correct && result >= money)
+                        {
+                            tb.Text = result.ToString();
+                        }
+                        else
+                        {
+                            tb.Text = money.ToString();
+                        }
+                        */
+                #endregion
+            }
+        }
+
     }
 }

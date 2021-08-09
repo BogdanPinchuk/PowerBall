@@ -137,7 +137,7 @@ namespace Powerball
             this.groupBoxBR.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxBR.Location = new System.Drawing.Point(3, 27);
             this.groupBoxBR.Name = "groupBoxBR";
-            this.groupBoxBR.Size = new System.Drawing.Size(908, 125);
+            this.groupBoxBR.Size = new System.Drawing.Size(908, 136);
             this.groupBoxBR.TabIndex = 2;
             this.groupBoxBR.TabStop = false;
             this.groupBoxBR.Text = "Base resources";
@@ -148,15 +148,16 @@ namespace Powerball
             this.groupBoxBegin.Controls.Add(this.buttonBG);
             this.groupBoxBegin.Location = new System.Drawing.Point(274, 23);
             this.groupBoxBegin.Name = "groupBoxBegin";
-            this.groupBoxBegin.Size = new System.Drawing.Size(112, 80);
+            this.groupBoxBegin.Size = new System.Drawing.Size(172, 91);
             this.groupBoxBegin.TabIndex = 5;
             this.groupBoxBegin.TabStop = false;
             // 
             // buttonBG
             // 
+            this.buttonBG.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonBG.Location = new System.Drawing.Point(6, 22);
             this.buttonBG.Name = "buttonBG";
-            this.buttonBG.Size = new System.Drawing.Size(100, 23);
+            this.buttonBG.Size = new System.Drawing.Size(160, 47);
             this.buttonBG.TabIndex = 0;
             this.buttonBG.Text = "Begin Game";
             this.buttonBG.UseVisualStyleBackColor = true;
@@ -170,7 +171,7 @@ namespace Powerball
             this.groupBoxMoney.Controls.Add(this.textBoxM);
             this.groupBoxMoney.Location = new System.Drawing.Point(6, 22);
             this.groupBoxMoney.Name = "groupBoxMoney";
-            this.groupBoxMoney.Size = new System.Drawing.Size(261, 81);
+            this.groupBoxMoney.Size = new System.Drawing.Size(261, 92);
             this.groupBoxMoney.TabIndex = 4;
             this.groupBoxMoney.TabStop = false;
             this.groupBoxMoney.Text = "Money";
@@ -183,6 +184,7 @@ namespace Powerball
             this.textBoxJ.TabIndex = 0;
             this.textBoxJ.Text = "20000000";
             this.textBoxJ.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxJ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxJ_KeyPress);
             // 
             // labelM
             // 
@@ -210,6 +212,7 @@ namespace Powerball
             this.textBoxM.TabIndex = 2;
             this.textBoxM.Text = "1000";
             this.textBoxM.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxM.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxM_KeyPress);
             // 
             // groupBoxLR
             // 
@@ -219,7 +222,7 @@ namespace Powerball
             this.groupBoxLR.Controls.Add(this.groupBoxPBR);
             this.groupBoxLR.Controls.Add(this.groupBoxPBW);
             this.groupBoxLR.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBoxLR.Location = new System.Drawing.Point(3, 152);
+            this.groupBoxLR.Location = new System.Drawing.Point(3, 163);
             this.groupBoxLR.Name = "groupBoxLR";
             this.groupBoxLR.Size = new System.Drawing.Size(908, 142);
             this.groupBoxLR.TabIndex = 3;
@@ -234,7 +237,7 @@ namespace Powerball
             this.groupBoxPD.Location = new System.Drawing.Point(586, 23);
             this.groupBoxPD.Name = "groupBoxPD";
             this.groupBoxPD.Size = new System.Drawing.Size(154, 96);
-            this.groupBoxPD.TabIndex = 3;
+            this.groupBoxPD.TabIndex = 0;
             this.groupBoxPD.TabStop = false;
             this.groupBoxPD.Text = "Perform draw";
             // 
@@ -306,7 +309,7 @@ namespace Powerball
             this.groupBoxPBW.Location = new System.Drawing.Point(7, 23);
             this.groupBoxPBW.Name = "groupBoxPBW";
             this.groupBoxPBW.Size = new System.Drawing.Size(312, 97);
-            this.groupBoxPBW.TabIndex = 0;
+            this.groupBoxPBW.TabIndex = 3;
             this.groupBoxPBW.TabStop = false;
             this.groupBoxPBW.Text = "Power Ball (white)";
             // 
@@ -377,7 +380,7 @@ namespace Powerball
             this.groupBoxRT.Controls.Add(this.groupBoxT);
             this.groupBoxRT.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxRT.Enabled = false;
-            this.groupBoxRT.Location = new System.Drawing.Point(3, 294);
+            this.groupBoxRT.Location = new System.Drawing.Point(3, 305);
             this.groupBoxRT.Name = "groupBoxRT";
             this.groupBoxRT.Size = new System.Drawing.Size(908, 198);
             this.groupBoxRT.TabIndex = 4;
@@ -1053,7 +1056,7 @@ namespace Powerball
             this.comboBoxPBW1.Size = new System.Drawing.Size(51, 36);
             this.comboBoxPBW1.TabIndex = 0;
             this.comboBoxPBW1.Text = "65";
-            this.comboBoxPBW1.TextUpdate += new System.EventHandler(this.comboBoxPBW1_TextUpdate);
+            this.comboBoxPBW1.TextUpdate += new System.EventHandler(this.ComboBoxPBW1_TextUpdate);
             this.comboBoxPBW1.TextChanged += new System.EventHandler(this.ComboBoxPBW1_TextChanged);
             this.comboBoxPBW1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBoxPBW1_KeyPress);
             // 
