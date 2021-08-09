@@ -99,7 +99,7 @@ namespace GameLogic
         private List<int> GetSortArray(int number)
             => Enumerable.Range(1, number + 1).ToList();
         
-        public Dictionary<List<int>, int> Get
+        //public Dictionary<List<int>, int> Get
 
     }
 
