@@ -54,6 +54,8 @@ namespace Powerball
             this.labelJ = new System.Windows.Forms.Label();
             this.textBoxM = new System.Windows.Forms.TextBox();
             this.groupBoxLR = new System.Windows.Forms.GroupBox();
+            this.groupBoxPD = new System.Windows.Forms.GroupBox();
+            this.buttonS = new System.Windows.Forms.Button();
             this.groupBoxPP = new System.Windows.Forms.GroupBox();
             this.textBoxPP1 = new System.Windows.Forms.TextBox();
             this.groupBoxPBR = new System.Windows.Forms.GroupBox();
@@ -65,6 +67,16 @@ namespace Powerball
             this.textBoxPBW2 = new System.Windows.Forms.TextBox();
             this.textBoxPBW1 = new System.Windows.Forms.TextBox();
             this.groupBoxRT = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dataGridViewRT = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBoxT = new System.Windows.Forms.GroupBox();
             this.buttonBuy = new System.Windows.Forms.Button();
             this.buttonAG = new System.Windows.Forms.Button();
@@ -77,31 +89,19 @@ namespace Powerball
             this.comboBoxPBW3 = new System.Windows.Forms.ComboBox();
             this.comboBoxPBW2 = new System.Windows.Forms.ComboBox();
             this.comboBoxPBW1 = new System.Windows.Forms.ComboBox();
-            this.groupBoxPD = new System.Windows.Forms.GroupBox();
-            this.buttonS = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dataGridViewRT = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuMain.SuspendLayout();
             this.groupBoxBR.SuspendLayout();
             this.groupBoxBegin.SuspendLayout();
             this.groupBoxMoney.SuspendLayout();
             this.groupBoxLR.SuspendLayout();
+            this.groupBoxPD.SuspendLayout();
             this.groupBoxPP.SuspendLayout();
             this.groupBoxPBR.SuspendLayout();
             this.groupBoxPBW.SuspendLayout();
             this.groupBoxRT.SuspendLayout();
-            this.groupBoxT.SuspendLayout();
-            this.groupBoxPD.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRT)).BeginInit();
+            this.groupBoxT.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuMain
@@ -225,6 +225,29 @@ namespace Powerball
             this.groupBoxLR.TabIndex = 3;
             this.groupBoxLR.TabStop = false;
             this.groupBoxLR.Text = "Lottery results";
+            // 
+            // groupBoxPD
+            // 
+            this.groupBoxPD.AutoSize = true;
+            this.groupBoxPD.Controls.Add(this.buttonS);
+            this.groupBoxPD.Enabled = false;
+            this.groupBoxPD.Location = new System.Drawing.Point(586, 23);
+            this.groupBoxPD.Name = "groupBoxPD";
+            this.groupBoxPD.Size = new System.Drawing.Size(154, 96);
+            this.groupBoxPD.TabIndex = 3;
+            this.groupBoxPD.TabStop = false;
+            this.groupBoxPD.Text = "Perform draw";
+            // 
+            // buttonS
+            // 
+            this.buttonS.Font = new System.Drawing.Font("Segoe UI", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonS.Location = new System.Drawing.Point(6, 22);
+            this.buttonS.Name = "buttonS";
+            this.buttonS.Size = new System.Drawing.Size(142, 52);
+            this.buttonS.TabIndex = 0;
+            this.buttonS.Text = "Start";
+            this.buttonS.UseVisualStyleBackColor = true;
+            this.buttonS.Click += new System.EventHandler(this.buttonS_Click);
             // 
             // groupBoxPP
             // 
@@ -353,12 +376,150 @@ namespace Powerball
             this.groupBoxRT.Controls.Add(this.groupBox1);
             this.groupBoxRT.Controls.Add(this.groupBoxT);
             this.groupBoxRT.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBoxRT.Enabled = false;
             this.groupBoxRT.Location = new System.Drawing.Point(3, 294);
             this.groupBoxRT.Name = "groupBoxRT";
             this.groupBoxRT.Size = new System.Drawing.Size(908, 198);
             this.groupBoxRT.TabIndex = 4;
             this.groupBoxRT.TabStop = false;
             this.groupBoxRT.Text = "Register tickets";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.AutoSize = true;
+            this.groupBox1.Controls.Add(this.dataGridViewRT);
+            this.groupBox1.Location = new System.Drawing.Point(362, 23);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(536, 153);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Registered tickets";
+            // 
+            // dataGridViewRT
+            // 
+            this.dataGridViewRT.AllowUserToAddRows = false;
+            this.dataGridViewRT.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dataGridViewRT.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewRT.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewRT.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            this.dataGridViewRT.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewRT.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewRT.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4,
+            this.Column5,
+            this.Column6,
+            this.Column7,
+            this.Column8});
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewRT.DefaultCellStyle = dataGridViewCellStyle10;
+            this.dataGridViewRT.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewRT.Location = new System.Drawing.Point(3, 19);
+            this.dataGridViewRT.Name = "dataGridViewRT";
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            this.dataGridViewRT.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewRT.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            this.dataGridViewRT.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewRT.RowTemplate.Height = 25;
+            this.dataGridViewRT.Size = new System.Drawing.Size(530, 131);
+            this.dataGridViewRT.TabIndex = 0;
+            // 
+            // Column1
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Format = "N0";
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Column1.HeaderText = "1";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column2
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.Format = "N0";
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Column2.HeaderText = "2";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column3
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.Format = "N0";
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Column3.HeaderText = "3";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column4
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.Format = "N0";
+            this.Column4.DefaultCellStyle = dataGridViewCellStyle6;
+            this.Column4.HeaderText = "4";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column5
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.Format = "N0";
+            this.Column5.DefaultCellStyle = dataGridViewCellStyle7;
+            this.Column5.HeaderText = "5";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column6
+            // 
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column6.DefaultCellStyle = dataGridViewCellStyle8;
+            this.Column6.HeaderText = "PB";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            this.Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "PP";
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            // 
+            // Column8
+            // 
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.Format = "N0";
+            this.Column8.DefaultCellStyle = dataGridViewCellStyle9;
+            this.Column8.HeaderText = "Win";
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
+            this.Column8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // groupBoxT
             // 
@@ -434,6 +595,7 @@ namespace Powerball
             this.checkBoxPP1.TabIndex = 6;
             this.checkBoxPP1.Text = "Power Play";
             this.checkBoxPP1.UseVisualStyleBackColor = false;
+            this.checkBoxPP1.CheckedChanged += new System.EventHandler(this.CheckBoxPP1_CheckedChanged);
             // 
             // comboBoxPBR1
             // 
@@ -892,164 +1054,6 @@ namespace Powerball
             this.comboBoxPBW1.TabIndex = 0;
             this.comboBoxPBW1.Text = "65";
             // 
-            // groupBoxPD
-            // 
-            this.groupBoxPD.AutoSize = true;
-            this.groupBoxPD.Controls.Add(this.buttonS);
-            this.groupBoxPD.Location = new System.Drawing.Point(586, 23);
-            this.groupBoxPD.Name = "groupBoxPD";
-            this.groupBoxPD.Size = new System.Drawing.Size(154, 96);
-            this.groupBoxPD.TabIndex = 3;
-            this.groupBoxPD.TabStop = false;
-            this.groupBoxPD.Text = "Perform draw";
-            // 
-            // buttonS
-            // 
-            this.buttonS.Font = new System.Drawing.Font("Segoe UI", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonS.Location = new System.Drawing.Point(6, 22);
-            this.buttonS.Name = "buttonS";
-            this.buttonS.Size = new System.Drawing.Size(142, 52);
-            this.buttonS.TabIndex = 0;
-            this.buttonS.Text = "Start";
-            this.buttonS.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.AutoSize = true;
-            this.groupBox1.Controls.Add(this.dataGridViewRT);
-            this.groupBox1.Location = new System.Drawing.Point(362, 23);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(536, 153);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Registered tickets";
-            // 
-            // dataGridViewRT
-            // 
-            this.dataGridViewRT.AllowUserToAddRows = false;
-            this.dataGridViewRT.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dataGridViewRT.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewRT.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewRT.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            this.dataGridViewRT.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewRT.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewRT.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4,
-            this.Column5,
-            this.Column6,
-            this.Column7,
-            this.Column8});
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewRT.DefaultCellStyle = dataGridViewCellStyle10;
-            this.dataGridViewRT.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewRT.Location = new System.Drawing.Point(3, 19);
-            this.dataGridViewRT.Name = "dataGridViewRT";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            this.dataGridViewRT.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewRT.RowsDefaultCellStyle = dataGridViewCellStyle12;
-            this.dataGridViewRT.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewRT.RowTemplate.Height = 25;
-            this.dataGridViewRT.Size = new System.Drawing.Size(530, 131);
-            this.dataGridViewRT.TabIndex = 0;
-            // 
-            // Column1
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.Format = "N0";
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Column1.HeaderText = "1";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Column2
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.Format = "N0";
-            this.Column2.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Column2.HeaderText = "2";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Column3
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.Format = "N0";
-            this.Column3.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Column3.HeaderText = "3";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Column4
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.Format = "N0";
-            this.Column4.DefaultCellStyle = dataGridViewCellStyle6;
-            this.Column4.HeaderText = "4";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Column5
-            // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.Format = "N0";
-            this.Column5.DefaultCellStyle = dataGridViewCellStyle7;
-            this.Column5.HeaderText = "5";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Column6
-            // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column6.DefaultCellStyle = dataGridViewCellStyle8;
-            this.Column6.HeaderText = "PB";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            this.Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "PP";
-            this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
-            // 
-            // Column8
-            // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.Format = "N0";
-            this.Column8.DefaultCellStyle = dataGridViewCellStyle9;
-            this.Column8.HeaderText = "Win";
-            this.Column8.Name = "Column8";
-            this.Column8.ReadOnly = true;
-            this.Column8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1074,6 +1078,7 @@ namespace Powerball
             this.groupBoxMoney.PerformLayout();
             this.groupBoxLR.ResumeLayout(false);
             this.groupBoxLR.PerformLayout();
+            this.groupBoxPD.ResumeLayout(false);
             this.groupBoxPP.ResumeLayout(false);
             this.groupBoxPP.PerformLayout();
             this.groupBoxPBR.ResumeLayout(false);
@@ -1082,11 +1087,10 @@ namespace Powerball
             this.groupBoxPBW.PerformLayout();
             this.groupBoxRT.ResumeLayout(false);
             this.groupBoxRT.PerformLayout();
-            this.groupBoxT.ResumeLayout(false);
-            this.groupBoxT.PerformLayout();
-            this.groupBoxPD.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRT)).EndInit();
+            this.groupBoxT.ResumeLayout(false);
+            this.groupBoxT.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
