@@ -145,5 +145,13 @@ namespace GameLogic
                 .ToList();
         }
 
+        /// <summary>
+        /// Checking this ticket with win numbers
+        /// </summary>
+        public void ValidateTicket()
+        {
+            // TODO: validator of ticket
+        }
+
     }
 }
