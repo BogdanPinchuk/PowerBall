@@ -29,6 +29,18 @@ namespace Powerball
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.menuMain = new System.Windows.Forms.MenuStrip();
             this.newGameMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,15 +66,29 @@ namespace Powerball
             this.textBoxPBW1 = new System.Windows.Forms.TextBox();
             this.groupBoxRT = new System.Windows.Forms.GroupBox();
             this.groupBoxT = new System.Windows.Forms.GroupBox();
-            this.comboBoxPBW1 = new System.Windows.Forms.ComboBox();
-            this.comboBoxPBW2 = new System.Windows.Forms.ComboBox();
-            this.comboBoxPBW3 = new System.Windows.Forms.ComboBox();
-            this.comboBoxPBW4 = new System.Windows.Forms.ComboBox();
-            this.comboBoxPBW5 = new System.Windows.Forms.ComboBox();
-            this.comboBoxPBR1 = new System.Windows.Forms.ComboBox();
-            this.checkBoxPP1 = new System.Windows.Forms.CheckBox();
-            this.textBoxCost = new System.Windows.Forms.TextBox();
+            this.buttonBuy = new System.Windows.Forms.Button();
+            this.buttonAG = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.textBoxCost = new System.Windows.Forms.TextBox();
+            this.checkBoxPP1 = new System.Windows.Forms.CheckBox();
+            this.comboBoxPBR1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxPBW5 = new System.Windows.Forms.ComboBox();
+            this.comboBoxPBW4 = new System.Windows.Forms.ComboBox();
+            this.comboBoxPBW3 = new System.Windows.Forms.ComboBox();
+            this.comboBoxPBW2 = new System.Windows.Forms.ComboBox();
+            this.comboBoxPBW1 = new System.Windows.Forms.ComboBox();
+            this.groupBoxPD = new System.Windows.Forms.GroupBox();
+            this.buttonS = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dataGridViewRT = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuMain.SuspendLayout();
             this.groupBoxBR.SuspendLayout();
             this.groupBoxBegin.SuspendLayout();
@@ -73,6 +99,9 @@ namespace Powerball
             this.groupBoxPBW.SuspendLayout();
             this.groupBoxRT.SuspendLayout();
             this.groupBoxT.SuspendLayout();
+            this.groupBoxPD.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRT)).BeginInit();
             this.SuspendLayout();
             // 
             // menuMain
@@ -81,7 +110,7 @@ namespace Powerball
             this.newGameMenu});
             this.menuMain.Location = new System.Drawing.Point(3, 3);
             this.menuMain.Name = "menuMain";
-            this.menuMain.Size = new System.Drawing.Size(686, 24);
+            this.menuMain.Size = new System.Drawing.Size(908, 24);
             this.menuMain.TabIndex = 0;
             this.menuMain.Text = "menuStrip1";
             // 
@@ -96,7 +125,7 @@ namespace Powerball
             // 
             this.statusMain.Location = new System.Drawing.Point(3, 508);
             this.statusMain.Name = "statusMain";
-            this.statusMain.Size = new System.Drawing.Size(686, 22);
+            this.statusMain.Size = new System.Drawing.Size(908, 22);
             this.statusMain.TabIndex = 1;
             this.statusMain.Text = "statusStrip1";
             // 
@@ -108,7 +137,7 @@ namespace Powerball
             this.groupBoxBR.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxBR.Location = new System.Drawing.Point(3, 27);
             this.groupBoxBR.Name = "groupBoxBR";
-            this.groupBoxBR.Size = new System.Drawing.Size(686, 125);
+            this.groupBoxBR.Size = new System.Drawing.Size(908, 125);
             this.groupBoxBR.TabIndex = 2;
             this.groupBoxBR.TabStop = false;
             this.groupBoxBR.Text = "Base resources";
@@ -185,13 +214,14 @@ namespace Powerball
             // groupBoxLR
             // 
             this.groupBoxLR.AutoSize = true;
+            this.groupBoxLR.Controls.Add(this.groupBoxPD);
             this.groupBoxLR.Controls.Add(this.groupBoxPP);
             this.groupBoxLR.Controls.Add(this.groupBoxPBR);
             this.groupBoxLR.Controls.Add(this.groupBoxPBW);
             this.groupBoxLR.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxLR.Location = new System.Drawing.Point(3, 152);
             this.groupBoxLR.Name = "groupBoxLR";
-            this.groupBoxLR.Size = new System.Drawing.Size(686, 142);
+            this.groupBoxLR.Size = new System.Drawing.Size(908, 142);
             this.groupBoxLR.TabIndex = 3;
             this.groupBoxLR.TabStop = false;
             this.groupBoxLR.Text = "Lottery results";
@@ -319,10 +349,13 @@ namespace Powerball
             // 
             // groupBoxRT
             // 
+            this.groupBoxRT.AutoSize = true;
+            this.groupBoxRT.Controls.Add(this.groupBox1);
             this.groupBoxRT.Controls.Add(this.groupBoxT);
-            this.groupBoxRT.Location = new System.Drawing.Point(7, 301);
+            this.groupBoxRT.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBoxRT.Location = new System.Drawing.Point(3, 294);
             this.groupBoxRT.Name = "groupBoxRT";
-            this.groupBoxRT.Size = new System.Drawing.Size(601, 204);
+            this.groupBoxRT.Size = new System.Drawing.Size(908, 198);
             this.groupBoxRT.TabIndex = 4;
             this.groupBoxRT.TabStop = false;
             this.groupBoxRT.Text = "Register tickets";
@@ -330,6 +363,8 @@ namespace Powerball
             // groupBoxT
             // 
             this.groupBoxT.AutoSize = true;
+            this.groupBoxT.Controls.Add(this.buttonBuy);
+            this.groupBoxT.Controls.Add(this.buttonAG);
             this.groupBoxT.Controls.Add(this.label1);
             this.groupBoxT.Controls.Add(this.textBoxCost);
             this.groupBoxT.Controls.Add(this.checkBoxPP1);
@@ -341,16 +376,74 @@ namespace Powerball
             this.groupBoxT.Controls.Add(this.comboBoxPBW1);
             this.groupBoxT.Location = new System.Drawing.Point(7, 23);
             this.groupBoxT.Name = "groupBoxT";
-            this.groupBoxT.Size = new System.Drawing.Size(349, 154);
+            this.groupBoxT.Size = new System.Drawing.Size(349, 153);
             this.groupBoxT.TabIndex = 0;
             this.groupBoxT.TabStop = false;
             this.groupBoxT.Text = "Ticket";
             // 
-            // comboBoxPBW1
+            // buttonBuy
             // 
-            this.comboBoxPBW1.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.comboBoxPBW1.FormattingEnabled = true;
-            this.comboBoxPBW1.Items.AddRange(new object[] {
+            this.buttonBuy.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonBuy.Location = new System.Drawing.Point(235, 102);
+            this.buttonBuy.Name = "buttonBuy";
+            this.buttonBuy.Size = new System.Drawing.Size(108, 29);
+            this.buttonBuy.TabIndex = 10;
+            this.buttonBuy.Text = "Buy";
+            this.buttonBuy.UseVisualStyleBackColor = true;
+            // 
+            // buttonAG
+            // 
+            this.buttonAG.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonAG.Location = new System.Drawing.Point(203, 64);
+            this.buttonAG.Name = "buttonAG";
+            this.buttonAG.Size = new System.Drawing.Size(140, 29);
+            this.buttonAG.TabIndex = 9;
+            this.buttonAG.Text = "Auto generation";
+            this.buttonAG.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(44, 106);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(161, 21);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "The price of this ticket";
+            // 
+            // textBoxCost
+            // 
+            this.textBoxCost.BackColor = System.Drawing.Color.White;
+            this.textBoxCost.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxCost.Location = new System.Drawing.Point(7, 102);
+            this.textBoxCost.Name = "textBoxCost";
+            this.textBoxCost.ReadOnly = true;
+            this.textBoxCost.Size = new System.Drawing.Size(30, 29);
+            this.textBoxCost.TabIndex = 7;
+            this.textBoxCost.Text = "2";
+            this.textBoxCost.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // checkBoxPP1
+            // 
+            this.checkBoxPP1.AutoSize = true;
+            this.checkBoxPP1.BackColor = System.Drawing.Color.Aqua;
+            this.checkBoxPP1.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.checkBoxPP1.Location = new System.Drawing.Point(7, 64);
+            this.checkBoxPP1.Name = "checkBoxPP1";
+            this.checkBoxPP1.Size = new System.Drawing.Size(125, 32);
+            this.checkBoxPP1.TabIndex = 6;
+            this.checkBoxPP1.Text = "Power Play";
+            this.checkBoxPP1.UseVisualStyleBackColor = false;
+            // 
+            // comboBoxPBR1
+            // 
+            this.comboBoxPBR1.BackColor = System.Drawing.Color.Red;
+            this.comboBoxPBR1.DropDownHeight = 125;
+            this.comboBoxPBR1.DropDownWidth = 55;
+            this.comboBoxPBR1.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxPBR1.FormattingEnabled = true;
+            this.comboBoxPBR1.IntegralHeight = false;
+            this.comboBoxPBR1.Items.AddRange(new object[] {
             "1",
             "2",
             "3",
@@ -376,300 +469,20 @@ namespace Powerball
             "23",
             "24",
             "25",
-            "26",
-            "27",
-            "28",
-            "29",
-            "30",
-            "31",
-            "32",
-            "33",
-            "34",
-            "35",
-            "36",
-            "37",
-            "38",
-            "39",
-            "40",
-            "41",
-            "42",
-            "43",
-            "44",
-            "45",
-            "46",
-            "47",
-            "48",
-            "49",
-            "50",
-            "51",
-            "52",
-            "53",
-            "54",
-            "55",
-            "56",
-            "57",
-            "58",
-            "59",
-            "60",
-            "61",
-            "62",
-            "63",
-            "64",
-            "65",
-            "66",
-            "67",
-            "68",
-            "69"});
-            this.comboBoxPBW1.Location = new System.Drawing.Point(7, 22);
-            this.comboBoxPBW1.Name = "comboBoxPBW1";
-            this.comboBoxPBW1.Size = new System.Drawing.Size(51, 36);
-            this.comboBoxPBW1.TabIndex = 0;
-            this.comboBoxPBW1.Text = "65";
-            // 
-            // comboBoxPBW2
-            // 
-            this.comboBoxPBW2.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.comboBoxPBW2.FormattingEnabled = true;
-            this.comboBoxPBW2.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16",
-            "17",
-            "18",
-            "19",
-            "20",
-            "21",
-            "22",
-            "23",
-            "24",
-            "25",
-            "26",
-            "27",
-            "28",
-            "29",
-            "30",
-            "31",
-            "32",
-            "33",
-            "34",
-            "35",
-            "36",
-            "37",
-            "38",
-            "39",
-            "40",
-            "41",
-            "42",
-            "43",
-            "44",
-            "45",
-            "46",
-            "47",
-            "48",
-            "49",
-            "50",
-            "51",
-            "52",
-            "53",
-            "54",
-            "55",
-            "56",
-            "57",
-            "58",
-            "59",
-            "60",
-            "61",
-            "62",
-            "63",
-            "64",
-            "65",
-            "66",
-            "67",
-            "68",
-            "69"});
-            this.comboBoxPBW2.Location = new System.Drawing.Point(64, 22);
-            this.comboBoxPBW2.Name = "comboBoxPBW2";
-            this.comboBoxPBW2.Size = new System.Drawing.Size(51, 36);
-            this.comboBoxPBW2.TabIndex = 1;
-            this.comboBoxPBW2.Text = "66";
-            // 
-            // comboBoxPBW3
-            // 
-            this.comboBoxPBW3.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.comboBoxPBW3.FormattingEnabled = true;
-            this.comboBoxPBW3.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16",
-            "17",
-            "18",
-            "19",
-            "20",
-            "21",
-            "22",
-            "23",
-            "24",
-            "25",
-            "26",
-            "27",
-            "28",
-            "29",
-            "30",
-            "31",
-            "32",
-            "33",
-            "34",
-            "35",
-            "36",
-            "37",
-            "38",
-            "39",
-            "40",
-            "41",
-            "42",
-            "43",
-            "44",
-            "45",
-            "46",
-            "47",
-            "48",
-            "49",
-            "50",
-            "51",
-            "52",
-            "53",
-            "54",
-            "55",
-            "56",
-            "57",
-            "58",
-            "59",
-            "60",
-            "61",
-            "62",
-            "63",
-            "64",
-            "65",
-            "66",
-            "67",
-            "68",
-            "69"});
-            this.comboBoxPBW3.Location = new System.Drawing.Point(121, 22);
-            this.comboBoxPBW3.Name = "comboBoxPBW3";
-            this.comboBoxPBW3.Size = new System.Drawing.Size(51, 36);
-            this.comboBoxPBW3.TabIndex = 2;
-            this.comboBoxPBW3.Text = "67";
-            // 
-            // comboBoxPBW4
-            // 
-            this.comboBoxPBW4.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.comboBoxPBW4.FormattingEnabled = true;
-            this.comboBoxPBW4.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16",
-            "17",
-            "18",
-            "19",
-            "20",
-            "21",
-            "22",
-            "23",
-            "24",
-            "25",
-            "26",
-            "27",
-            "28",
-            "29",
-            "30",
-            "31",
-            "32",
-            "33",
-            "34",
-            "35",
-            "36",
-            "37",
-            "38",
-            "39",
-            "40",
-            "41",
-            "42",
-            "43",
-            "44",
-            "45",
-            "46",
-            "47",
-            "48",
-            "49",
-            "50",
-            "51",
-            "52",
-            "53",
-            "54",
-            "55",
-            "56",
-            "57",
-            "58",
-            "59",
-            "60",
-            "61",
-            "62",
-            "63",
-            "64",
-            "65",
-            "66",
-            "67",
-            "68",
-            "69"});
-            this.comboBoxPBW4.Location = new System.Drawing.Point(178, 22);
-            this.comboBoxPBW4.Name = "comboBoxPBW4";
-            this.comboBoxPBW4.Size = new System.Drawing.Size(51, 36);
-            this.comboBoxPBW4.TabIndex = 3;
-            this.comboBoxPBW4.Text = "68";
+            "26"});
+            this.comboBoxPBR1.Location = new System.Drawing.Point(292, 22);
+            this.comboBoxPBR1.Name = "comboBoxPBR1";
+            this.comboBoxPBR1.Size = new System.Drawing.Size(51, 36);
+            this.comboBoxPBR1.TabIndex = 5;
+            this.comboBoxPBR1.Text = "26";
             // 
             // comboBoxPBW5
             // 
+            this.comboBoxPBW5.DropDownHeight = 125;
+            this.comboBoxPBW5.DropDownWidth = 55;
             this.comboBoxPBW5.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBoxPBW5.FormattingEnabled = true;
+            this.comboBoxPBW5.IntegralHeight = false;
             this.comboBoxPBW5.Items.AddRange(new object[] {
             "1",
             "2",
@@ -746,12 +559,14 @@ namespace Powerball
             this.comboBoxPBW5.TabIndex = 4;
             this.comboBoxPBW5.Text = "69";
             // 
-            // comboBoxPBR1
+            // comboBoxPBW4
             // 
-            this.comboBoxPBR1.BackColor = System.Drawing.Color.Red;
-            this.comboBoxPBR1.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.comboBoxPBR1.FormattingEnabled = true;
-            this.comboBoxPBR1.Items.AddRange(new object[] {
+            this.comboBoxPBW4.DropDownHeight = 125;
+            this.comboBoxPBW4.DropDownWidth = 55;
+            this.comboBoxPBW4.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxPBW4.FormattingEnabled = true;
+            this.comboBoxPBW4.IntegralHeight = false;
+            this.comboBoxPBW4.Items.AddRange(new object[] {
             "1",
             "2",
             "3",
@@ -777,52 +592,469 @@ namespace Powerball
             "23",
             "24",
             "25",
-            "26"});
-            this.comboBoxPBR1.Location = new System.Drawing.Point(292, 22);
-            this.comboBoxPBR1.Name = "comboBoxPBR1";
-            this.comboBoxPBR1.Size = new System.Drawing.Size(51, 36);
-            this.comboBoxPBR1.TabIndex = 5;
-            this.comboBoxPBR1.Text = "26";
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "37",
+            "38",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "56",
+            "57",
+            "58",
+            "59",
+            "60",
+            "61",
+            "62",
+            "63",
+            "64",
+            "65",
+            "66",
+            "67",
+            "68",
+            "69"});
+            this.comboBoxPBW4.Location = new System.Drawing.Point(178, 22);
+            this.comboBoxPBW4.Name = "comboBoxPBW4";
+            this.comboBoxPBW4.Size = new System.Drawing.Size(51, 36);
+            this.comboBoxPBW4.TabIndex = 3;
+            this.comboBoxPBW4.Text = "68";
             // 
-            // checkBoxPP1
+            // comboBoxPBW3
             // 
-            this.checkBoxPP1.AutoSize = true;
-            this.checkBoxPP1.BackColor = System.Drawing.Color.Aqua;
-            this.checkBoxPP1.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.checkBoxPP1.Location = new System.Drawing.Point(7, 65);
-            this.checkBoxPP1.Name = "checkBoxPP1";
-            this.checkBoxPP1.Size = new System.Drawing.Size(125, 32);
-            this.checkBoxPP1.TabIndex = 6;
-            this.checkBoxPP1.Text = "Power Play";
-            this.checkBoxPP1.UseVisualStyleBackColor = false;
+            this.comboBoxPBW3.DropDownHeight = 125;
+            this.comboBoxPBW3.DropDownWidth = 55;
+            this.comboBoxPBW3.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxPBW3.FormattingEnabled = true;
+            this.comboBoxPBW3.IntegralHeight = false;
+            this.comboBoxPBW3.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "37",
+            "38",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "56",
+            "57",
+            "58",
+            "59",
+            "60",
+            "61",
+            "62",
+            "63",
+            "64",
+            "65",
+            "66",
+            "67",
+            "68",
+            "69"});
+            this.comboBoxPBW3.Location = new System.Drawing.Point(121, 22);
+            this.comboBoxPBW3.Name = "comboBoxPBW3";
+            this.comboBoxPBW3.Size = new System.Drawing.Size(51, 36);
+            this.comboBoxPBW3.TabIndex = 2;
+            this.comboBoxPBW3.Text = "67";
             // 
-            // textBoxCost
+            // comboBoxPBW2
             // 
-            this.textBoxCost.BackColor = System.Drawing.Color.White;
-            this.textBoxCost.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxCost.Location = new System.Drawing.Point(6, 103);
-            this.textBoxCost.Name = "textBoxCost";
-            this.textBoxCost.ReadOnly = true;
-            this.textBoxCost.Size = new System.Drawing.Size(30, 29);
-            this.textBoxCost.TabIndex = 7;
-            this.textBoxCost.Text = "2";
-            this.textBoxCost.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.comboBoxPBW2.DropDownHeight = 125;
+            this.comboBoxPBW2.DropDownWidth = 55;
+            this.comboBoxPBW2.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxPBW2.FormattingEnabled = true;
+            this.comboBoxPBW2.IntegralHeight = false;
+            this.comboBoxPBW2.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "37",
+            "38",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "56",
+            "57",
+            "58",
+            "59",
+            "60",
+            "61",
+            "62",
+            "63",
+            "64",
+            "65",
+            "66",
+            "67",
+            "68",
+            "69"});
+            this.comboBoxPBW2.Location = new System.Drawing.Point(64, 22);
+            this.comboBoxPBW2.Name = "comboBoxPBW2";
+            this.comboBoxPBW2.Size = new System.Drawing.Size(51, 36);
+            this.comboBoxPBW2.TabIndex = 1;
+            this.comboBoxPBW2.Text = "66";
             // 
-            // label1
+            // comboBoxPBW1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(43, 107);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(161, 21);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "The price of this ticket";
+            this.comboBoxPBW1.DropDownHeight = 125;
+            this.comboBoxPBW1.DropDownWidth = 55;
+            this.comboBoxPBW1.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxPBW1.FormattingEnabled = true;
+            this.comboBoxPBW1.IntegralHeight = false;
+            this.comboBoxPBW1.ItemHeight = 28;
+            this.comboBoxPBW1.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "37",
+            "38",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "56",
+            "57",
+            "58",
+            "59",
+            "60",
+            "61",
+            "62",
+            "63",
+            "64",
+            "65",
+            "66",
+            "67",
+            "68",
+            "69"});
+            this.comboBoxPBW1.Location = new System.Drawing.Point(7, 22);
+            this.comboBoxPBW1.Name = "comboBoxPBW1";
+            this.comboBoxPBW1.Size = new System.Drawing.Size(51, 36);
+            this.comboBoxPBW1.TabIndex = 0;
+            this.comboBoxPBW1.Text = "65";
+            // 
+            // groupBoxPD
+            // 
+            this.groupBoxPD.AutoSize = true;
+            this.groupBoxPD.Controls.Add(this.buttonS);
+            this.groupBoxPD.Location = new System.Drawing.Point(586, 23);
+            this.groupBoxPD.Name = "groupBoxPD";
+            this.groupBoxPD.Size = new System.Drawing.Size(154, 96);
+            this.groupBoxPD.TabIndex = 3;
+            this.groupBoxPD.TabStop = false;
+            this.groupBoxPD.Text = "Perform draw";
+            // 
+            // buttonS
+            // 
+            this.buttonS.Font = new System.Drawing.Font("Segoe UI", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonS.Location = new System.Drawing.Point(6, 22);
+            this.buttonS.Name = "buttonS";
+            this.buttonS.Size = new System.Drawing.Size(142, 52);
+            this.buttonS.TabIndex = 0;
+            this.buttonS.Text = "Start";
+            this.buttonS.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.AutoSize = true;
+            this.groupBox1.Controls.Add(this.dataGridViewRT);
+            this.groupBox1.Location = new System.Drawing.Point(362, 23);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(536, 153);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Registered tickets";
+            // 
+            // dataGridViewRT
+            // 
+            this.dataGridViewRT.AllowUserToAddRows = false;
+            this.dataGridViewRT.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dataGridViewRT.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewRT.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewRT.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            this.dataGridViewRT.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewRT.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewRT.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4,
+            this.Column5,
+            this.Column6,
+            this.Column7,
+            this.Column8});
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewRT.DefaultCellStyle = dataGridViewCellStyle10;
+            this.dataGridViewRT.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewRT.Location = new System.Drawing.Point(3, 19);
+            this.dataGridViewRT.Name = "dataGridViewRT";
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            this.dataGridViewRT.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewRT.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            this.dataGridViewRT.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewRT.RowTemplate.Height = 25;
+            this.dataGridViewRT.Size = new System.Drawing.Size(530, 131);
+            this.dataGridViewRT.TabIndex = 0;
+            // 
+            // Column1
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Format = "N0";
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Column1.HeaderText = "1";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column2
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.Format = "N0";
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Column2.HeaderText = "2";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column3
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.Format = "N0";
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Column3.HeaderText = "3";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column4
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.Format = "N0";
+            this.Column4.DefaultCellStyle = dataGridViewCellStyle6;
+            this.Column4.HeaderText = "4";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column5
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.Format = "N0";
+            this.Column5.DefaultCellStyle = dataGridViewCellStyle7;
+            this.Column5.HeaderText = "5";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column6
+            // 
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column6.DefaultCellStyle = dataGridViewCellStyle8;
+            this.Column6.HeaderText = "PB";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            this.Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "PP";
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            // 
+            // Column8
+            // 
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.Format = "N0";
+            this.Column8.DefaultCellStyle = dataGridViewCellStyle9;
+            this.Column8.HeaderText = "Win";
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
+            this.Column8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(692, 533);
+            this.ClientSize = new System.Drawing.Size(914, 533);
             this.Controls.Add(this.groupBoxRT);
             this.Controls.Add(this.groupBoxLR);
             this.Controls.Add(this.groupBoxBR);
@@ -852,6 +1084,9 @@ namespace Powerball
             this.groupBoxRT.PerformLayout();
             this.groupBoxT.ResumeLayout(false);
             this.groupBoxT.PerformLayout();
+            this.groupBoxPD.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRT)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -892,6 +1127,20 @@ namespace Powerball
         private System.Windows.Forms.ComboBox comboBoxPBW1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxCost;
+        private System.Windows.Forms.Button buttonAG;
+        private System.Windows.Forms.Button buttonBuy;
+        private System.Windows.Forms.GroupBox groupBoxPD;
+        private System.Windows.Forms.Button buttonS;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.DataGridView dataGridViewRT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
     }
 }
 
