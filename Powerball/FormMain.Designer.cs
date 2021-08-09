@@ -247,7 +247,7 @@ namespace Powerball
             this.buttonS.TabIndex = 0;
             this.buttonS.Text = "Start";
             this.buttonS.UseVisualStyleBackColor = true;
-            this.buttonS.Click += new System.EventHandler(this.buttonS_Click);
+            this.buttonS.Click += new System.EventHandler(this.ButtonS_Click);
             // 
             // groupBoxPP
             // 
@@ -1053,6 +1053,9 @@ namespace Powerball
             this.comboBoxPBW1.Size = new System.Drawing.Size(51, 36);
             this.comboBoxPBW1.TabIndex = 0;
             this.comboBoxPBW1.Text = "65";
+            this.comboBoxPBW1.TextUpdate += new System.EventHandler(this.comboBoxPBW1_TextUpdate);
+            this.comboBoxPBW1.TextChanged += new System.EventHandler(this.ComboBoxPBW1_TextChanged);
+            this.comboBoxPBW1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBoxPBW1_KeyPress);
             // 
             // FormMain
             // 

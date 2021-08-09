@@ -17,6 +17,14 @@ namespace Powerball
         /// </summary>
         private int costWithOutPP = 2;
         private int costWithPP = 3;
+        /// <summary>
+        /// Numner of maximum value for white balls
+        /// </summary>
+        private int maxOfWhite = 69;
+        /// <summary>
+        /// Numner of maximum value for red balls
+        /// </summary>
+        private int maxOfRed = 26;
 
         #region Properties for future logic (price of titcket)
         /// <summary>
@@ -35,7 +43,7 @@ namespace Powerball
         {
             get { return costWithPP; }
             set { costWithPP = value; }
-        } 
+        }
         #endregion
 
         public FormMain()
@@ -93,7 +101,7 @@ namespace Powerball
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void buttonS_Click(object sender, EventArgs e)
+        private void ButtonS_Click(object sender, EventArgs e)
         {
             if (buttonS.Text == "Start")
             {
@@ -107,6 +115,42 @@ namespace Powerball
 
                 buttonS.Text = "Start";
             }
+        }
+
+        /// <summary>
+        /// Checking 1-st of ComboBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBoxPBW1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //ValidateInputDataCB(comboBoxPBW1, e, maxOfWhite);
+        }
+
+
+        /// <summary>
+        /// Checking of validate input data
+        /// </summary>
+        /// <param name="cb">element of form</param>
+        /// <param name="e">data of keys</param>
+        /// <param name="max">Limit of chousing number</param>
+        private void ValidateInputDataCB(ComboBox cb, KeyPressEventArgs e, int max)
+        {
+            if (e.KeyChar == ((char)Keys.Enter))
+            {
+                
+            }
+
+        }
+
+        private void ComboBoxPBW1_TextChanged(object sender, EventArgs e)
+        {
+            //MessageBox.Show("changed");
+        }
+
+        private void comboBoxPBW1_TextUpdate(object sender, EventArgs e)
+        {
+            //MessageBox.Show("changed 2");
         }
     }
 }
