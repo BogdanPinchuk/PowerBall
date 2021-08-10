@@ -54,7 +54,8 @@ namespace Powerball
         /// <summary>
         /// Base logig of game
         /// </summary>
-        private PowerBallLogic powerBall = new(maxOfWhite, maxOfRed, MaxMultiplier, countChoseWhiteBalls);
+        private PowerBallLogic powerBall = 
+            new(maxOfWhite, maxOfRed, MaxMultiplier, countChoseWhiteBalls);
 
 
         #region Properties for future logic (price of titcket)
