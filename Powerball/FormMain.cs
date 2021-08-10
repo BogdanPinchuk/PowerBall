@@ -25,21 +25,28 @@ namespace Powerball
         /// <summary>
         /// Numner of maximum value for white balls
         /// </summary>
-        private static int maxOfWhite = 69;
+        private static readonly int maxOfWhite = 69;
         /// <summary>
         /// Numner of maximum value for red balls
         /// </summary>
-        private static int maxOfRed = 26;
+        private static readonly int maxOfRed = 26;
         /// <summary>
         /// Max values for power play game when we can use 10x multiplier
         /// </summary>
-        private static long maxMoneyForPP = 150_000_000;
-
+        private static readonly long maxMoneyForPP = 150_000_000;
+        /// <summary>
+        /// Min value for jackpot
+        /// </summary>
+        private static readonly long minJackpot = 20_000_000;
+        /// <summary>
+        /// value of jackpot
+        /// </summary>
+        private static long jackpot;
 
         /// <summary>
         /// Base logig of game
         /// </summary>
-        private PowerBallLogic powerBall = new(maxOfWhite, maxOfRed);
+        private PowerBallLogic powerBall = new(maxOfWhite, maxOfRed, MaxMultiplier);
 
 
         #region Properties for future logic (price of titcket)
@@ -60,6 +67,12 @@ namespace Powerball
             get { return costWithPP; }
             set { costWithPP = value; }
         }
+        
+        /// <summary>
+        /// Max value for multiplier in power play
+        /// </summary>
+        private static int MaxMultiplier
+            => (jackpot <= maxMoneyForPP) ? 10 : 5;
         #endregion
 
         public FormMain()
@@ -153,6 +166,9 @@ namespace Powerball
             {
                 // TODO: Clear of table
 
+                // get multiplier
+                textBoxPP1.Text = powerBall.GetRandomMultiplier().ToString();
+
                 // block ability buy ticket
                 groupBoxT.Enabled = false;
 
@@ -161,6 +177,9 @@ namespace Powerball
             else
             {
                 // TODO: Calc winnings
+
+                // clear multiplier
+                textBoxPP1.Text = string.Empty;
 
                 // unlock ability buy ticket
                 groupBoxT.Enabled = true;
@@ -212,7 +231,11 @@ namespace Powerball
         /// <param name="e"></param>
         private void TextBoxJ_KeyPress(object sender, KeyPressEventArgs e)
         {
-            ValidateInputMoney(textBoxJ, 20_000_000, e);
+            ValidateInputMoney(textBoxJ, minJackpot, e);
+
+            // save value for jackpot
+            bool correct = long.TryParse(textBoxJ.Text, out long result);
+            jackpot = (correct && result >= minJackpot) ? result : minJackpot;
         }
 
         /// <summary>
