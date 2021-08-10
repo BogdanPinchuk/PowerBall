@@ -31,6 +31,10 @@ namespace Powerball
         /// </summary>
         private static readonly int maxOfRed = 26;
         /// <summary>
+        /// Count of chose white numbers
+        /// </summary>
+        private static readonly int countChoseWhiteBalls = 5;
+        /// <summary>
         /// Max values for power play game when we can use 10x multiplier
         /// </summary>
         private static readonly long maxMoneyForPP = 150_000_000;
@@ -42,11 +46,15 @@ namespace Powerball
         /// value of jackpot
         /// </summary>
         private static long jackpot;
+        /// <summary>
+        /// random balls (white and red) for "Perform draw"
+        /// </summary>
+        private KeyValuePair<int, List<int>> randomBalls;
 
         /// <summary>
         /// Base logig of game
         /// </summary>
-        private PowerBallLogic powerBall = new(maxOfWhite, maxOfRed, MaxMultiplier);
+        private PowerBallLogic powerBall = new(maxOfWhite, maxOfRed, MaxMultiplier, countChoseWhiteBalls);
 
 
         #region Properties for future logic (price of titcket)
@@ -67,7 +75,7 @@ namespace Powerball
             get { return costWithPP; }
             set { costWithPP = value; }
         }
-        
+
         /// <summary>
         /// Max value for multiplier in power play
         /// </summary>
@@ -162,9 +170,29 @@ namespace Powerball
         /// <param name="e"></param>
         private void ButtonS_Click(object sender, EventArgs e)
         {
+            // white balls
+            List<TextBox> textBoxes = new List<TextBox>()
+                {
+                    textBoxPBW1,
+                    textBoxPBW2,
+                    textBoxPBW3,
+                    textBoxPBW4,
+                    textBoxPBW5,
+                };
+
             if (buttonS.Text == "Start")
             {
                 // TODO: Clear of table
+
+                // get random values for wins balls
+                randomBalls = powerBall.GetRandomValues();
+
+                // set values in textbox
+                for (int i = 0; i < textBoxes.Count; i++)
+                    textBoxes[i].Text = randomBalls.Value[i].ToString();
+
+                // red ball
+                textBoxPBR1.Text = randomBalls.Key.ToString();
 
                 // get multiplier
                 textBoxPP1.Text = powerBall.GetRandomMultiplier().ToString();
@@ -177,6 +205,12 @@ namespace Powerball
             else
             {
                 // TODO: Calc winnings
+
+                // clear values for powerball
+                for (int i = 0; i < textBoxes.Count; i++)
+                    textBoxes[i].Text = string.Empty;
+
+                textBoxPBR1.Text = string.Empty;
 
                 // clear multiplier
                 textBoxPP1.Text = string.Empty;

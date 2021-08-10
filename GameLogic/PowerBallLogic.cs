@@ -14,6 +14,10 @@ namespace GameLogic
         /// </summary>
         private int maxOfWhite;
         /// <summary>
+        /// Count of chose white numbers
+        /// </summary>
+        private int countChoseWhiteBalls;
+        /// <summary>
         /// Numner of maximum value for red balls
         /// </summary>
         private int maxOfRed;
@@ -92,11 +96,15 @@ namespace GameLogic
         /// </summary>
         /// <param name="maxOfWhite">max value for white balls</param>
         /// <param name="maxOfRed">max value for red ball</param>
-        public PowerBallLogic(int maxOfWhite, int maxOfRed, int maxMultiplier)
+        /// <param name="maxMultiplier">max value for multiplier</param>
+        /// <param name="countChoseWhiteBalls">count of chose white balls</param>
+        public PowerBallLogic(int maxOfWhite, int maxOfRed, int maxMultiplier,
+            int countChoseWhiteBalls)
         {
             this.maxOfWhite = maxOfWhite;
             this.maxOfRed = maxOfRed;
             this.maxMultiplier = maxMultiplier;
+            this.countChoseWhiteBalls = countChoseWhiteBalls;
         }
 
         /// <summary>
@@ -111,10 +119,8 @@ namespace GameLogic
         /// Return random values for autocomplate ticket
         /// </summary>
         /// <returns></returns>
-        public Dictionary<List<int>, int> GetRandomValues()
-        {
-            return default;
-        }
+        public KeyValuePair<int, List<int>> GetRandomValues()
+            => new KeyValuePair<int, List<int>>(GetRandomRedBall(), GetRandomWhiteBalls());
 
         /// <summary>
         /// Return random value for power play game
@@ -127,6 +133,7 @@ namespace GameLogic
                 array1 = new List<int>();
 
             #region add elements (balls) for get multiplier
+            // now moment hardcode for count of balls with different multiplier
             // x2
             array0.AddRange(Enumerable
                 .Range(1, 24)
@@ -182,6 +189,100 @@ namespace GameLogic
             return array1[index];
         }
 
+        /// <summary>
+        /// Return random value for red ball in powerball
+        /// </summary>
+        /// <returns></returns>
+        private int GetRandomRedBall()
+        {
+            // create base list
+            List<int> array0 = new List<int>(),
+                array1 = new List<int>();
+
+            // add elements (balls) for get red ball
+            array0.AddRange(Enumerable
+                .Range(1, MaxOfRed)
+                .ToList());
+
+            // count of balls in virtual capacity
+            int capacity = array0.Count;
+
+            // temp value for index of element
+            int index;
+
+            // mixing balls
+            for (int i = 0; i < capacity; i++)
+            {
+                // get random ball from all balls
+                index = rnd.Next(0, array0.Count);
+
+                // put this ball in other virtual capacity
+                array1.Add(array0[index]);
+
+                // remove this index in first virtual capacity
+                array0.RemoveAt(index);
+            }
+
+            // extract random ball from mixing balls
+            index = rnd.Next(0, array1.Count);
+
+            // return value of random ball
+            return array1[index];
+        }
+
+        /// <summary>
+        /// Return random value for white balls in powerball
+        /// </summary>
+        /// <returns></returns>
+        private List<int> GetRandomWhiteBalls()
+        {
+            // create base list and list with array balls
+            List<int> array0 = new List<int>(),
+                array1 = new List<int>(),
+                result = new List<int>();
+
+            // add elements (balls) for get red ball
+            array0.AddRange(Enumerable
+                .Range(1, MaxOfWhite)
+                .ToList());
+
+            // count of balls in virtual capacity
+            int capacity = array0.Count;
+
+            // temp value for index of element
+            int index;
+
+            // mixing balls
+            for (int i = 0; i < capacity; i++)
+            {
+                // get random ball from all balls
+                index = rnd.Next(0, array0.Count);
+
+                // put this ball in other virtual capacity
+                array1.Add(array0[index]);
+
+                // remove this index in first virtual capacity
+                array0.RemoveAt(index);
+            }
+
+            // extract random balls from mixing balls
+            for (int i = 0; i < countChoseWhiteBalls; i++)
+            {
+                // get random ball from all balls
+                index = rnd.Next(0, array1.Count);
+
+                // put this ball in other virtual capacity
+                result.Add(array1[index]);
+
+                // remove this index in first virtual capacity
+                array1.RemoveAt(index);
+            }
+
+            // sort values
+            result.Sort();
+
+            return result;
+        }
     }
 
     /// <summary>
