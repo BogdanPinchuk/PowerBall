@@ -36,7 +36,7 @@ namespace GameLogic
         /// <summary>
         /// for get random numbers
         /// </summary>
-        private Random rnd = new Random();
+        private readonly Random rnd = new();
 
         /// <summary>
         /// Max value of white balls

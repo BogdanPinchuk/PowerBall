@@ -5,6 +5,7 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>PB.ico</ApplicationIcon>
+    <StartupObject>Powerball.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

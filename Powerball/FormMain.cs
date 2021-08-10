@@ -105,6 +105,13 @@ namespace Powerball
             groupBoxPD.Enabled = true;
             groupBoxRT.Enabled = true;
 
+            // save value for jackpot
+            bool correct = long.TryParse(textBoxJ.Text, out long result);
+            jackpot = (correct && result >= minJackpot) ? result : minJackpot;
+
+            // corrected value of max multiplier
+            powerBall = new(maxOfWhite, maxOfRed, MaxMultiplier, countChoseWhiteBalls);
+
             // clear textbox
             ClearTextBoxOfLotеery();
         }
@@ -266,10 +273,6 @@ namespace Powerball
         private void TextBoxJ_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidateInputMoney(textBoxJ, minJackpot, e);
-
-            // save value for jackpot
-            bool correct = long.TryParse(textBoxJ.Text, out long result);
-            jackpot = (correct && result >= minJackpot) ? result : minJackpot;
         }
 
         /// <summary>
