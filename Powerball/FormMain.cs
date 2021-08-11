@@ -734,6 +734,7 @@ namespace Powerball
             }
 
             // delete ball in this element, because when we have value less 10 this element self add "0"
+            // example, we have "6", after open their number changed on "60" and ect.
             selectedBalls.Remove(int.Parse(cb.Text));
 
             // delete selected balls
