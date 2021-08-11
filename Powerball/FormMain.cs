@@ -733,6 +733,9 @@ namespace Powerball
                     break;
             }
 
+            // delete ball in this element, because when we have value less 10 this element self add "0"
+            selectedBalls.Remove(int.Parse(cb.Text));
+
             // delete selected balls
             foreach (var item in selectedBalls)
                 baseBalls.Remove(item);
