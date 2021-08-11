@@ -248,6 +248,25 @@ namespace GameLogic
 
             return result;
         }
+
+        /// <summary>
+        /// Get full sorted array white balls
+        /// </summary>
+        /// <returns></returns>
+        public List<int> GetArrayWhiteBalls()
+            => Enumerable
+            .Range(1, MaxOfWhite)
+            .ToList();
+
+        /// <summary>
+        /// Get full sorted array red balls
+        /// </summary>
+        /// <returns></returns>
+        public List<int> GetArrayRedBalls()
+            => Enumerable
+            .Range(1, MaxOfRed)
+            .ToList();
+
     }
 
     /// <summary>

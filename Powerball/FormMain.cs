@@ -124,9 +124,6 @@ namespace Powerball
 
             // clear table
             ClearOfTable();
-
-            // auto-substitution values for customer ticket
-            AutoGenerateTicketValues();
         }
 
         /// <summary>
@@ -149,6 +146,9 @@ namespace Powerball
             // clear of table
             ClearOfTable();
 
+            // clear list of registered tickets
+            tickets.Clear();
+
             // validate input values of money
             ValidateInputMoney(textBoxJ, minJackpot);   // jackpot
             ValidateInputMoney(textBoxM, 2);            // customer money
@@ -162,6 +162,9 @@ namespace Powerball
 
             // clear textbox
             ClearTextBoxOfLotеery();
+
+            // auto-substitution values for customer ticket
+            AutoGenerateTicketValues();
         }
 
         /// <summary>
@@ -212,7 +215,7 @@ namespace Powerball
             table.AllowUserToDeleteRows = false;
             table.AllowUserToOrderColumns = true;
 
-            
+
         }
 
         /// <summary>
@@ -253,6 +256,9 @@ namespace Powerball
 
             // clear table
             ClearOfTable();
+
+            // clear list of registered tickets
+            tickets.Clear();
         }
 
         /// <summary>
@@ -290,6 +296,9 @@ namespace Powerball
 
             if (buttonS.Text == "Start")
             {
+                // block ability buy ticket
+                groupBoxT.Enabled = false;
+
                 // get random values for wins balls
                 randomBalls = powerBall.GetRandomValues();
 
@@ -303,8 +312,7 @@ namespace Powerball
                 // get multiplier
                 textBoxPP1.Text = powerBall.GetRandomMultiplier().ToString();
 
-                // block ability buy ticket
-                groupBoxT.Enabled = false;
+                // TODO: Analisys of registered tickets
 
                 buttonS.Text = "Next";
             }
@@ -330,16 +338,6 @@ namespace Powerball
 
                 buttonS.Text = "Start";
             }
-        }
-
-        private void ComboBoxPBW1_TextChanged(object sender, EventArgs e)
-        {
-            //MessageBox.Show("changed");
-        }
-
-        private void ComboBoxPBW1_TextUpdate(object sender, EventArgs e)
-        {
-            //MessageBox.Show("changed 2");
         }
 
         /// <summary>
@@ -481,28 +479,7 @@ namespace Powerball
         }
 
         /// <summary>
-        /// Checking 1-st white ball of ComboBox whe we press Enter
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ComboBoxPBW1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == ((char)Keys.Enter))
-                ValidateInputValueBall(comboBoxPBW1, BallType.White);
-        }
-
-        /// <summary>
-        /// Checking 1-st white ball of ComboBox when we leave it
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ComboBoxPBW1_Leave(object sender, EventArgs e)
-        {
-            ValidateInputValueBall(comboBoxPBW1, BallType.White);
-        }
-
-        /// <summary>
-        /// Checking red ball of ComboBox
+        /// Checking red ball of ComboBox when we press Enter
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -523,7 +500,27 @@ namespace Powerball
         }
 
         /// <summary>
-        /// Checking 2-nd white ball of ComboBox whe we press Enter
+        /// Checking 1-st white ball of ComboBox when we press Enter
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBoxPBW1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ((char)Keys.Enter))
+                ValidateInputValueBall(comboBoxPBW1, BallType.White);
+        }
+
+        /// <summary>
+        /// Checking 1-st white ball of ComboBox when we leave it
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBoxPBW1_Leave(object sender, EventArgs e)
+        {
+            ValidateInputValueBall(comboBoxPBW1, BallType.White);
+        }
+        /// <summary>
+        /// Checking 2-nd white ball of ComboBox when we press Enter
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -544,7 +541,7 @@ namespace Powerball
         }
 
         /// <summary>
-        /// Checking 3-rd white ball of ComboBox whe we press Enter
+        /// Checking 3-rd white ball of ComboBox when we press Enter
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -565,7 +562,7 @@ namespace Powerball
         }
 
         /// <summary>
-        /// Checking 4-th white ball of ComboBox whe we press Enter
+        /// Checking 4-th white ball of ComboBox when we press Enter
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -586,7 +583,7 @@ namespace Powerball
         }
 
         /// <summary>
-        /// Checking 5-th white ball of ComboBox whe we press Enter
+        /// Checking 5-th white ball of ComboBox when we press Enter
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -633,6 +630,9 @@ namespace Powerball
                 statusLabelInfo.Text = $"You don`t have enought money. Your balanse is ${balanse}";
                 return;
             }
+
+            // sort white balls
+            tempTicket.WhiteBalls.Sort();
 
             // adding ticket to registration
             tickets.Add(tempTicket);
@@ -707,6 +707,99 @@ namespace Powerball
             table.AllowUserToAddRows = false;
             table.AllowUserToDeleteRows = false;
             table.AllowUserToOrderColumns = true;
+        }
+
+        /// <summary>
+        /// Change accessed values to selecting
+        /// </summary>
+        /// <param name="cb">comboBox wich changing their value</param>
+        /// <param name="ball">type of ball (color)</param>
+        private void ChangeAccessesValuesBall(ComboBox cb, BallType ball)
+        {
+            // create full array for some type of base balls and selected variants
+            List<int> baseBalls = new(),
+                selectedBalls = new();
+
+            // compalte list
+            switch (ball)
+            {
+                case BallType.White:
+                    baseBalls = powerBall.GetArrayWhiteBalls();
+                    selectedBalls.AddRange(tempTicket.WhiteBalls);
+                    break;
+                case BallType.Red:
+                    baseBalls = powerBall.GetArrayRedBalls();
+                    selectedBalls.Add(tempTicket.RedBall);
+                    break;
+            }
+
+            // delete selected balls
+            foreach (var item in selectedBalls)
+                baseBalls.Remove(item);
+
+            // write not removed values in comboBox for choise
+            cb.Items.Clear();
+            cb.Items.AddRange(baseBalls.Select(i => i.ToString()).ToArray());
+        }
+
+        /// <summary>
+        /// Changing 1-st white ball of ComboBox when we click of mouse
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBoxPBW1_Enter(object sender, EventArgs e)
+        {
+            ChangeAccessesValuesBall(comboBoxPBW1, BallType.White);
+        }
+
+        /// <summary>
+        /// Changing 2-nd white ball of ComboBox when we click of mouse
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBoxPBW2_Enter(object sender, EventArgs e)
+        {
+            ChangeAccessesValuesBall(comboBoxPBW2, BallType.White);
+        }
+
+        /// <summary>
+        /// Changing 3-rd white ball of ComboBox when we click of mouse
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBoxPBW3_Enter(object sender, EventArgs e)
+        {
+            ChangeAccessesValuesBall(comboBoxPBW3, BallType.White);
+        }
+
+        /// <summary>
+        /// Changing 4-th white ball of ComboBox when we click of mouse
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBoxPBW4_Enter(object sender, EventArgs e)
+        {
+            ChangeAccessesValuesBall(comboBoxPBW4, BallType.White);
+        }
+
+        /// <summary>
+        /// Changing 5-th white ball of ComboBox when we click of mouse
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBoxPBW5_Enter(object sender, EventArgs e)
+        {
+            ChangeAccessesValuesBall(comboBoxPBW5, BallType.White);
+        }
+
+        /// <summary>
+        /// Changing red ball of ComboBox when we click of mouse
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBoxPBR1_Enter(object sender, EventArgs e)
+        {
+            ChangeAccessesValuesBall(comboBoxPBR1, BallType.Red);
         }
 
     }
