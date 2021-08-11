@@ -69,6 +69,10 @@ namespace Powerball
         /// new name table for simple access
         /// </summary>
         private readonly DataGridView table;
+        /// <summary>
+        /// Registered tickets for game
+        /// </summary>
+        private List<Ticket> tickets = new();
 
         /// <summary>
         /// Base logig of game
@@ -200,12 +204,6 @@ namespace Powerball
                 }
             }
 
-            // fix cells
-            //table.AutoResizeColumnHeadersHeight();
-            //table.AutoResizeColumns();
-            //table.AutoResizeRows();
-            //table.AutoResizeRowHeadersWidth(DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders);
-
             // remove selection of table
             table.ClearSelection();
 
@@ -213,6 +211,8 @@ namespace Powerball
             table.AllowUserToAddRows = false;
             table.AllowUserToDeleteRows = false;
             table.AllowUserToOrderColumns = true;
+
+            
         }
 
         /// <summary>
@@ -266,6 +266,9 @@ namespace Powerball
                 textBoxCost.Text = $"{CostWithPP}";
             else
                 textBoxCost.Text = $"{CostWithOutPP}";
+
+            // save result in tempTicket
+            tempTicket.PowerPlay = checkBoxPP1.Checked;
         }
 
         /// <summary>
@@ -309,6 +312,9 @@ namespace Powerball
             {
                 // Calc winnings
                 ClearOfTable();
+
+                // clear list of registered tickets
+                tickets.Clear();
 
                 // clear values for powerball
                 for (int i = 0; i < textBoxes.Count; i++)
@@ -417,7 +423,7 @@ namespace Powerball
             comboBoxPBR1.Text = randomBalls.Key.ToString();
 
             // save data in temp variable
-            tempTicket.ChangeTicket(randomBalls.Value, randomBalls.Key);
+            tempTicket.ChangeTicket(randomBalls.Value, randomBalls.Key, checkBoxPP1.Checked);
             tempTicket.PowerPlay = checkBoxPP1.Checked;
         }
 
@@ -598,6 +604,109 @@ namespace Powerball
         private void ComboBoxPBW5_Leave(object sender, EventArgs e)
         {
             ValidateInputValueBall(comboBoxPBW5, BallType.White);
+        }
+
+        /// <summary>
+        /// Adding complate ticket to registration lottery
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonBuy_Click(object sender, EventArgs e)
+        {
+            // balanse of gamer
+            long balanse = long.Parse(textBoxM.Text);
+
+            // checked balasnce of customer money
+            if (balanse >= costWithPP && tempTicket.PowerPlay) // with powerplay
+            {
+                // payment for ticket
+                balanse -= costWithPP;
+            }
+            else if (balanse >= costWithOutPP && !tempTicket.PowerPlay)  // without powerplay
+            {
+                // payment for ticket
+                balanse -= costWithOutPP;
+            }
+            else
+            {
+                // show info / message
+                statusLabelInfo.Text = $"You don`t have enought money. Your balanse is ${balanse}";
+                return;
+            }
+
+            // adding ticket to registration
+            tickets.Add(tempTicket);
+
+            // update table
+            UpdateOfTable();
+
+            // show info
+            statusLabelInfo.Text = $"You bought a ticket for ${textBoxCost.Text}. Your balanse is ${balanse}";
+
+            // corected balasnce
+            textBoxM.Text = balanse.ToString();
+
+            // auto-substitution values for customer ticket
+            AutoGenerateTicketValues();
+        }
+
+        /// <summary>
+        /// update table with registrated tickets
+        /// </summary>
+        private void UpdateOfTable()
+        {
+            // clear table (for add only header)
+            ClearOfTable();
+
+            // checking accessebility tickets
+            if (tickets.Count < 1)
+            {
+                // show info / message
+                statusLabelInfo.Text = $"You don`t have registered tickets.";
+                return;
+            }
+            /*
+            else
+            {
+                // show info / message
+                statusLabelInfo.Text = "Info";
+            }
+            */
+
+            // add rows to table
+            table.Rows.Add(tickets.Count);
+
+            // add data to table
+            for (int i = 0; i < tickets.Count; i++)
+            {
+                // numeration of tickets
+                table.Rows[i].HeaderCell.Value = $"{i + 1}";
+                // write data
+                {
+                    int j = 1;
+                    // white balls
+                    foreach (int value in tickets[i].WhiteBalls)
+                        table.Rows[i].Cells[$"Column{j++}"].Value = value;
+                    // red ball
+                    table.Rows[i].Cells[$"Column{j++}"].Value = tickets[i].RedBall;
+                    // power play
+                    table.Rows[i].Cells[$"Column{j++}"].Value = tickets[i].PowerPlay;
+                }
+            }
+
+            // fix cells
+            //table.AutoResizeColumnHeadersHeight();
+            table.AutoResizeColumns();
+            table.AutoResizeRows();
+            table.AutoResizeRowHeadersWidth(DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders);
+
+            // remove selection of table
+            table.ClearSelection();
+
+            // some parameters
+            table.AllowUserToAddRows = false;
+            table.AllowUserToDeleteRows = false;
+            table.AllowUserToOrderColumns = true;
         }
 
     }

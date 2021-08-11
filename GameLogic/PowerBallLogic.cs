@@ -373,10 +373,11 @@ namespace GameLogic
         /// </summary>
         /// <param name="whiteBalls">values for white balls</param>
         /// <param name="redBall">value for red ball</param>
-        public void ChangeTicket(List<int> whiteBalls, int redBall)
+        public void ChangeTicket(List<int> whiteBalls, int redBall, bool powerPlay)
         {
             WhiteBalls = whiteBalls;
             RedBall = redBall;
+            PowerPlay = powerPlay;
         }
 
         /// <summary>
