@@ -282,7 +282,6 @@ namespace Powerball
             this.textBoxPP1.ReadOnly = true;
             this.textBoxPP1.Size = new System.Drawing.Size(55, 52);
             this.textBoxPP1.TabIndex = 5;
-            this.textBoxPP1.Text = "10";
             this.textBoxPP1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // groupBoxPBR
@@ -305,7 +304,6 @@ namespace Powerball
             this.textBoxPBR1.ReadOnly = true;
             this.textBoxPBR1.Size = new System.Drawing.Size(55, 52);
             this.textBoxPBR1.TabIndex = 1;
-            this.textBoxPBR1.Text = "26";
             this.textBoxPBR1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // groupBoxPBW
@@ -332,7 +330,6 @@ namespace Powerball
             this.textBoxPBW5.ReadOnly = true;
             this.textBoxPBW5.Size = new System.Drawing.Size(55, 52);
             this.textBoxPBW5.TabIndex = 4;
-            this.textBoxPBW5.Text = "69";
             this.textBoxPBW5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBoxPBW4
@@ -344,7 +341,6 @@ namespace Powerball
             this.textBoxPBW4.ReadOnly = true;
             this.textBoxPBW4.Size = new System.Drawing.Size(55, 52);
             this.textBoxPBW4.TabIndex = 3;
-            this.textBoxPBW4.Text = "68";
             this.textBoxPBW4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBoxPBW3
@@ -356,7 +352,6 @@ namespace Powerball
             this.textBoxPBW3.ReadOnly = true;
             this.textBoxPBW3.Size = new System.Drawing.Size(55, 52);
             this.textBoxPBW3.TabIndex = 2;
-            this.textBoxPBW3.Text = "67";
             this.textBoxPBW3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBoxPBW2
@@ -368,7 +363,6 @@ namespace Powerball
             this.textBoxPBW2.ReadOnly = true;
             this.textBoxPBW2.Size = new System.Drawing.Size(55, 52);
             this.textBoxPBW2.TabIndex = 1;
-            this.textBoxPBW2.Text = "66";
             this.textBoxPBW2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBoxPBW1
@@ -380,7 +374,6 @@ namespace Powerball
             this.textBoxPBW1.ReadOnly = true;
             this.textBoxPBW1.Size = new System.Drawing.Size(55, 52);
             this.textBoxPBW1.TabIndex = 0;
-            this.textBoxPBW1.Text = "65";
             this.textBoxPBW1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // groupBoxRT
@@ -651,6 +644,8 @@ namespace Powerball
             this.comboBoxPBR1.Size = new System.Drawing.Size(51, 36);
             this.comboBoxPBR1.TabIndex = 5;
             this.comboBoxPBR1.Text = "26";
+            this.comboBoxPBR1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBoxPBR1_KeyPress);
+            this.comboBoxPBR1.Leave += new System.EventHandler(this.ComboBoxPBR1_Leave);
             // 
             // comboBoxPBW5
             // 
@@ -734,6 +729,8 @@ namespace Powerball
             this.comboBoxPBW5.Size = new System.Drawing.Size(51, 36);
             this.comboBoxPBW5.TabIndex = 4;
             this.comboBoxPBW5.Text = "69";
+            this.comboBoxPBW5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBoxPBW5_KeyPress);
+            this.comboBoxPBW5.Leave += new System.EventHandler(this.ComboBoxPBW5_Leave);
             // 
             // comboBoxPBW4
             // 
@@ -817,6 +814,8 @@ namespace Powerball
             this.comboBoxPBW4.Size = new System.Drawing.Size(51, 36);
             this.comboBoxPBW4.TabIndex = 3;
             this.comboBoxPBW4.Text = "68";
+            this.comboBoxPBW4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBoxPBW4_KeyPress);
+            this.comboBoxPBW4.Leave += new System.EventHandler(this.ComboBoxPBW4_Leave);
             // 
             // comboBoxPBW3
             // 
@@ -900,6 +899,8 @@ namespace Powerball
             this.comboBoxPBW3.Size = new System.Drawing.Size(51, 36);
             this.comboBoxPBW3.TabIndex = 2;
             this.comboBoxPBW3.Text = "67";
+            this.comboBoxPBW3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBoxPBW3_KeyPress);
+            this.comboBoxPBW3.Leave += new System.EventHandler(this.ComboBoxPBW3_Leave);
             // 
             // comboBoxPBW2
             // 
@@ -983,6 +984,8 @@ namespace Powerball
             this.comboBoxPBW2.Size = new System.Drawing.Size(51, 36);
             this.comboBoxPBW2.TabIndex = 1;
             this.comboBoxPBW2.Text = "66";
+            this.comboBoxPBW2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBoxPBW2_KeyPress);
+            this.comboBoxPBW2.Leave += new System.EventHandler(this.ComboBoxPBW2_Leave);
             // 
             // comboBoxPBW1
             // 
@@ -1070,6 +1073,7 @@ namespace Powerball
             this.comboBoxPBW1.TextUpdate += new System.EventHandler(this.ComboBoxPBW1_TextUpdate);
             this.comboBoxPBW1.TextChanged += new System.EventHandler(this.ComboBoxPBW1_TextChanged);
             this.comboBoxPBW1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBoxPBW1_KeyPress);
+            this.comboBoxPBW1.Leave += new System.EventHandler(this.ComboBoxPBW1_Leave);
             // 
             // FormMain
             // 

@@ -15,6 +15,21 @@ namespace Powerball
     public partial class FormMain : Form
     {
         /// <summary>
+        /// Type of ball determined by color
+        /// </summary>
+        enum BallType
+        {
+            /// <summary>
+            /// white color of ball
+            /// </summary>
+            White,
+            /// <summary>
+            /// red color of ball
+            /// </summary>
+            Red,
+        }
+
+        /// <summary>
         /// Cost when customer don`t want use Power Play
         /// </summary>
         private int costWithOutPP = 2;
@@ -47,16 +62,24 @@ namespace Powerball
         /// </summary>
         private static long jackpot;
         /// <summary>
-        /// random balls (white and red) for "Perform draw"
+        /// random balls (red and white) for "Perform draw"
         /// </summary>
         private KeyValuePair<int, List<int>> randomBalls;
 
         /// <summary>
         /// Base logig of game
         /// </summary>
-        private PowerBallLogic powerBall = 
+        private PowerBallLogic powerBall =
             new(maxOfWhite, maxOfRed, MaxMultiplier, countChoseWhiteBalls);
 
+        /// <summary>
+        /// Temporary ticket for future save in list buyed tickets
+        /// </summary>
+        private Ticket tempTicket = new()
+        {
+            MaxOfWhite = maxOfWhite,
+            MaxOfRed = maxOfRed,
+        };
 
         #region Properties for future logic (price of titcket)
         /// <summary>
@@ -87,6 +110,9 @@ namespace Powerball
         public FormMain()
         {
             InitializeComponent();
+
+            // auto-substitution values for customer ticket
+            AutoGenerateTicketValues();
         }
 
         /// <summary>
@@ -105,6 +131,10 @@ namespace Powerball
             // unlock of game
             groupBoxPD.Enabled = true;
             groupBoxRT.Enabled = true;
+
+            // validate input values of money
+            ValidateInputMoney(textBoxJ, minJackpot);   // jackpot
+            ValidateInputMoney(textBoxM, 2);            // customer money
 
             // save value for jackpot
             bool correct = long.TryParse(textBoxJ.Text, out long result);
@@ -178,15 +208,15 @@ namespace Powerball
         /// <param name="e"></param>
         private void ButtonS_Click(object sender, EventArgs e)
         {
-            // white balls
-            List<TextBox> textBoxes = new List<TextBox>()
-                {
-                    textBoxPBW1,
-                    textBoxPBW2,
-                    textBoxPBW3,
-                    textBoxPBW4,
-                    textBoxPBW5,
-                };
+            // textbox for white balls
+            List<TextBox> textBoxes = new()
+            {
+                textBoxPBW1,
+                textBoxPBW2,
+                textBoxPBW3,
+                textBoxPBW4,
+                textBoxPBW5,
+            };
 
             if (buttonS.Text == "Start")
             {
@@ -231,17 +261,6 @@ namespace Powerball
         }
 
         /// <summary>
-        /// Checking 1-st of ComboBox
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ComboBoxPBW1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //ValidateInputDataCB(comboBoxPBW1, e, maxOfWhite);
-        }
-
-
-        /// <summary>
         /// Checking of validate input data
         /// </summary>
         /// <param name="cb">element of form</param>
@@ -273,7 +292,8 @@ namespace Powerball
         /// <param name="e"></param>
         private void TextBoxJ_KeyPress(object sender, KeyPressEventArgs e)
         {
-            ValidateInputMoney(textBoxJ, minJackpot, e);
+            if (e.KeyChar == ((char)Keys.Enter))
+                ValidateInputMoney(textBoxJ, minJackpot);
         }
 
         /// <summary>
@@ -283,37 +303,34 @@ namespace Powerball
         /// <param name="e"></param>
         private void TextBoxM_KeyPress(object sender, KeyPressEventArgs e)
         {
-            ValidateInputMoney(textBoxM, 2, e);
+            if (e.KeyChar == ((char)Keys.Enter))
+                ValidateInputMoney(textBoxM, 2);
         }
 
         /// <summary>
-        /// Validate input data
+        /// Validate input data for entering money
         /// </summary>
         /// <param name="tb">element of form where input some money</param>
         /// <param name="money">amount of money</param>
-        /// <param name="e">keys of keyboard</param>
-        private void ValidateInputMoney(TextBox tb, long money, KeyPressEventArgs e)
+        private void ValidateInputMoney(TextBox tb, long money)
         {
-            if (e.KeyChar == ((char)Keys.Enter))
-            {
-                // check correct input data
-                bool correct = long.TryParse(tb.Text, out long result);
+            // check correct input data
+            bool correct = long.TryParse(tb.Text, out long result);
 
-                tb.Text = (correct && result >= money) ? result.ToString() : money.ToString();
+            tb.Text = (correct && result >= money) ? result.ToString() : money.ToString();
 
-                #region first variant
-                /*
-                        if (correct && result >= money)
-                        {
-                            tb.Text = result.ToString();
-                        }
-                        else
-                        {
-                            tb.Text = money.ToString();
-                        }
-                        */
-                #endregion
-            }
+            #region first variant
+            /*
+                    if (correct && result >= money)
+                    {
+                        tb.Text = result.ToString();
+                    }
+                    else
+                    {
+                        tb.Text = money.ToString();
+                    }
+                    */
+            #endregion
         }
 
         /// <summary>
@@ -323,7 +340,222 @@ namespace Powerball
         /// <param name="e"></param>
         private void ButtonAG_Click(object sender, EventArgs e)
         {
-
+            // auto-substitution values for customer ticket
+            AutoGenerateTicketValues();
         }
+
+        /// <summary>
+        /// Auto generation random values for customer ticket
+        /// </summary>
+        private void AutoGenerateTicketValues()
+        {
+            // textbox for white balls
+            List<ComboBox> comboBoxes = new()
+            {
+                comboBoxPBW1,
+                comboBoxPBW2,
+                comboBoxPBW3,
+                comboBoxPBW4,
+                comboBoxPBW5,
+            };
+
+            // get random values for wins balls
+            randomBalls = powerBall.GetRandomValues();
+
+            // set values in textbox
+            for (int i = 0; i < comboBoxes.Count; i++)
+                comboBoxes[i].Text = randomBalls.Value[i].ToString();
+
+            // red ball
+            comboBoxPBR1.Text = randomBalls.Key.ToString();
+
+            // save data in temp variable
+            tempTicket.ChangeTicket(randomBalls.Value, randomBalls.Key);
+            tempTicket.PowerPlay = checkBoxPP1.Checked;
+        }
+
+        /// <summary>
+        /// Validate input data for entering value ball
+        /// </summary>
+        /// <param name="cb">comboBox wich changing their value</param>
+        /// <param name="ball">type of ball (color)</param>
+        private void ValidateInputValueBall(ComboBox cb, BallType ball)
+        {
+            // check correct input data
+            bool correct = int.TryParse(cb.Text, out int result);
+
+            if (correct)
+            {
+                // validate result
+                switch (ball)
+                {
+                    case BallType.White:
+                        // if result is within limits and absent in other checbox? then we can change value
+                        if (1 <= result && result <= maxOfWhite && !tempTicket.WhiteBalls.Contains(result))
+                        {
+                            tempTicket.WhiteBalls[cb.TabIndex] = result;
+                            cb.Text = result.ToString();
+                        }
+                        else
+                        {
+                            // get tabindex and find old value
+                            cb.Text = tempTicket.WhiteBalls[cb.TabIndex].ToString();
+                        }
+                        break;
+                    case BallType.Red:
+                        if (1 <= result && result <= maxOfRed)
+                        {
+                            tempTicket.RedBall = result;
+                            cb.Text = result.ToString();
+                        }
+                        else
+                        {
+                            cb.Text = tempTicket.RedBall.ToString();
+                        }
+                        break;
+                }
+            }
+            else
+            {
+                // return back old value
+                switch (ball)
+                {
+                    case BallType.White:
+                        // get tabindex and find old value
+                        cb.Text = tempTicket.WhiteBalls[cb.TabIndex].ToString();
+                        break;
+                    case BallType.Red:
+                        cb.Text = tempTicket.RedBall.ToString();
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Checking 1-st white ball of ComboBox whe we press Enter
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBoxPBW1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ((char)Keys.Enter))
+                ValidateInputValueBall(comboBoxPBW1, BallType.White);
+        }
+
+        /// <summary>
+        /// Checking 1-st white ball of ComboBox when we leave it
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBoxPBW1_Leave(object sender, EventArgs e)
+        {
+            ValidateInputValueBall(comboBoxPBW1, BallType.White);
+        }
+
+        /// <summary>
+        /// Checking red ball of ComboBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBoxPBR1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ((char)Keys.Enter))
+                ValidateInputValueBall(comboBoxPBR1, BallType.Red);
+        }
+
+        /// <summary>
+        /// Checking red ball of ComboBox when we leave it
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBoxPBR1_Leave(object sender, EventArgs e)
+        {
+            ValidateInputValueBall(comboBoxPBR1, BallType.Red);
+        }
+
+        /// <summary>
+        /// Checking 2-nd white ball of ComboBox whe we press Enter
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBoxPBW2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ((char)Keys.Enter))
+                ValidateInputValueBall(comboBoxPBW2, BallType.White);
+        }
+
+        /// <summary>
+        /// Checking 2-nd white ball of ComboBox when we leave it
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBoxPBW2_Leave(object sender, EventArgs e)
+        {
+            ValidateInputValueBall(comboBoxPBW2, BallType.White);
+        }
+
+        /// <summary>
+        /// Checking 3-rd white ball of ComboBox whe we press Enter
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBoxPBW3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ((char)Keys.Enter))
+                ValidateInputValueBall(comboBoxPBW3, BallType.White);
+        }
+
+        /// <summary>
+        /// Checking 3-rd white ball of ComboBox when we leave it
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBoxPBW3_Leave(object sender, EventArgs e)
+        {
+            ValidateInputValueBall(comboBoxPBW3, BallType.White);
+        }
+
+        /// <summary>
+        /// Checking 4-th white ball of ComboBox whe we press Enter
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBoxPBW4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ((char)Keys.Enter))
+                ValidateInputValueBall(comboBoxPBW4, BallType.White);
+        }
+
+        /// <summary>
+        /// Checking 4-th white ball of ComboBox when we leave it
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBoxPBW4_Leave(object sender, EventArgs e)
+        {
+            ValidateInputValueBall(comboBoxPBW4, BallType.White);
+        }
+
+        /// <summary>
+        /// Checking 5-th white ball of ComboBox whe we press Enter
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBoxPBW5_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ((char)Keys.Enter))
+                ValidateInputValueBall(comboBoxPBW5, BallType.White);
+        }
+
+        /// <summary>
+        /// Checking 5-th white ball of ComboBox when we leave it
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBoxPBW5_Leave(object sender, EventArgs e)
+        {
+            ValidateInputValueBall(comboBoxPBW5, BallType.White);
+        }
+
     }
 }

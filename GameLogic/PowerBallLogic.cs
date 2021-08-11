@@ -419,6 +419,17 @@ namespace GameLogic
         }
 
         /// <summary>
+        /// Change current ticket
+        /// </summary>
+        /// <param name="whiteBalls">values for white balls</param>
+        /// <param name="redBall">value for red ball</param>
+        public void ChangeTicket(List<int> whiteBalls, int redBall)
+        {
+            WhiteBalls = whiteBalls;
+            RedBall = redBall;
+        }
+
+        /// <summary>
         /// Checking this ticket with win numbers
         /// </summary>
         public void ValidateTicket()
