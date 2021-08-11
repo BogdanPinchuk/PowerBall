@@ -78,16 +78,13 @@ namespace Powerball
         /// Base logig of game
         /// </summary>
         private PowerBallLogic powerBall =
-            new(maxOfWhite, maxOfRed, MaxMultiplier, countChoseWhiteBalls);
+            new(maxOfWhite, maxOfRed, MaxMultiplier,
+                countChoseWhiteBalls, jackpot);
 
         /// <summary>
         /// Temporary ticket for future save in list buyed tickets
         /// </summary>
-        private Ticket tempTicket = new()
-        {
-            MaxOfWhite = maxOfWhite,
-            MaxOfRed = maxOfRed,
-        };
+        private Ticket tempTicket = new(maxOfWhite, maxOfRed);
 
         #region Properties for future logic (price of titcket)
         /// <summary>
@@ -158,7 +155,8 @@ namespace Powerball
             jackpot = (correct && result >= minJackpot) ? result : minJackpot;
 
             // corrected value of max multiplier
-            powerBall = new(maxOfWhite, maxOfRed, MaxMultiplier, countChoseWhiteBalls);
+            powerBall = new(maxOfWhite, maxOfRed, MaxMultiplier,
+                countChoseWhiteBalls, jackpot);
 
             // clear textbox
             ClearTextBoxOfLotеery();
@@ -312,7 +310,11 @@ namespace Powerball
                 // get multiplier
                 textBoxPP1.Text = powerBall.GetRandomMultiplier().ToString();
 
-                // TODO: Analisys of registered tickets
+                // Analisys of registered tickets
+                powerBall.CheckingTickets(tickets, randomBalls);
+
+                // present winnings tickets
+                PresentWinningsInTable();
 
                 buttonS.Text = "Next";
             }
@@ -367,7 +369,7 @@ namespace Powerball
         /// </summary>
         /// <param name="tb">element of form where input some money</param>
         /// <param name="money">amount of money</param>
-        private void ValidateInputMoney(TextBox tb, long money)
+        private static void ValidateInputMoney(TextBox tb, long money)
         {
             // check correct input data
             bool correct = long.TryParse(tb.Text, out long result);
@@ -637,6 +639,9 @@ namespace Powerball
             // adding ticket to registration
             tickets.Add(tempTicket);
 
+            // create new tempTicket
+            tempTicket = new(maxOfWhite, maxOfRed);
+
             // update table
             UpdateOfTable();
 
@@ -681,6 +686,7 @@ namespace Powerball
             {
                 // numeration of tickets
                 table.Rows[i].HeaderCell.Value = $"{i + 1}";
+
                 // write data
                 {
                     int j = 1;
@@ -804,6 +810,75 @@ namespace Powerball
         private void ComboBoxPBR1_Enter(object sender, EventArgs e)
         {
             ChangeAccessesValuesBall(comboBoxPBR1, BallType.Red);
+        }
+
+        /// <summary>
+        /// Show in table result of winnings tickets
+        /// </summary>
+        private void PresentWinningsInTable()
+        {
+            // clear table (for add only header)
+            ClearOfTable();
+
+            // checking accessebility tickets
+            if (tickets.Count < 1)
+            {
+                // show info / message
+                statusLabelInfo.Text = $"You don`t have registered tickets.";
+                return;
+            }
+
+            // add rows to table
+            table.Rows.Add(tickets.Count);
+
+            // add data to table
+            for (int i = 0; i < tickets.Count; i++)
+            {
+                // numeration of tickets
+                table.Rows[i].HeaderCell.Value = $"{i + 1}";
+
+                // write data
+                {
+                    int j = 1;
+                    // white balls
+                    //foreach (int value in tickets[i].WhiteBalls)
+                    //{
+                    //    table.Rows[i].Cells[$"Column{j}"].Value = value;
+                    //    if (powerBall.WinValues[i].Value[j - 1])
+                    //        table.Rows[i].Cells[$"Column{j}"].Style.BackColor = Color.Green;
+                    //}
+                    for (; j <= tickets[i].WhiteBalls.Count; j++)
+                    {
+                        table.Rows[i].Cells[$"Column{j}"].Value = tickets[i].WhiteBalls[j - 1];
+                        if (powerBall.WinValues[i].Value[j - 1])
+                            table.Rows[i].Cells[$"Column{j}"].Style.BackColor = Color.LightGreen;
+                    }
+
+                    // red ball
+                    table.Rows[i].Cells[$"Column{j}"].Value = tickets[i].RedBall;
+                    if (powerBall.WinValues[i].Key)
+                        table.Rows[i].Cells[$"Column{j}"].Style.BackColor = Color.LightGreen;
+
+                    // power play
+                    table.Rows[i].Cells[$"Column{++j}"].Value = tickets[i].PowerPlay;
+                    // winning money
+                    table.Rows[i].Cells[$"Column{++j}"].Value = powerBall.WinMoneys[i];
+                }
+            }
+
+            // fix cells
+            //table.AutoResizeColumnHeadersHeight();
+            table.AutoResizeColumns();
+            table.AutoResizeRows();
+            table.AutoResizeRowHeadersWidth(DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders);
+
+            // remove selection of table
+            table.ClearSelection();
+
+            // some parameters
+            table.AllowUserToAddRows = false;
+            table.AllowUserToDeleteRows = false;
+            table.AllowUserToOrderColumns = true;
         }
 
     }
