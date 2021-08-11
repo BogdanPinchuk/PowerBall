@@ -192,13 +192,9 @@ namespace Powerball
         private void CheckBoxPP1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxPP1.Checked)
-            {
                 textBoxCost.Text = $"{CostWithPP}";
-            }
             else
-            {
                 textBoxCost.Text = $"{CostWithOutPP}";
-            }
         }
 
         /// <summary>
@@ -260,21 +256,6 @@ namespace Powerball
             }
         }
 
-        /// <summary>
-        /// Checking of validate input data
-        /// </summary>
-        /// <param name="cb">element of form</param>
-        /// <param name="e">data of keys</param>
-        /// <param name="max">Limit of chousing number</param>
-        private void ValidateInputDataCB(ComboBox cb, KeyPressEventArgs e, int max)
-        {
-            if (e.KeyChar == ((char)Keys.Enter))
-            {
-
-            }
-
-        }
-
         private void ComboBoxPBW1_TextChanged(object sender, EventArgs e)
         {
             //MessageBox.Show("changed");
@@ -322,13 +303,9 @@ namespace Powerball
             #region first variant
             /*
                     if (correct && result >= money)
-                    {
                         tb.Text = result.ToString();
-                    }
                     else
-                    {
                         tb.Text = money.ToString();
-                    }
                     */
             #endregion
         }
@@ -397,10 +374,8 @@ namespace Powerball
                             cb.Text = result.ToString();
                         }
                         else
-                        {
                             // get tabindex and find old value
                             cb.Text = tempTicket.WhiteBalls[cb.TabIndex].ToString();
-                        }
                         break;
                     case BallType.Red:
                         if (1 <= result && result <= maxOfRed)
@@ -409,9 +384,7 @@ namespace Powerball
                             cb.Text = result.ToString();
                         }
                         else
-                        {
                             cb.Text = tempTicket.RedBall.ToString();
-                        }
                         break;
                 }
             }

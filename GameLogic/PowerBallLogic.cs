@@ -14,25 +14,17 @@ namespace GameLogic
         /// </summary>
         private int maxOfWhite;
         /// <summary>
-        /// Count of chose white numbers
-        /// </summary>
-        private int countChoseWhiteBalls;
-        /// <summary>
         /// Numner of maximum value for red balls
         /// </summary>
         private int maxOfRed;
-        ///// <summary>
-        ///// Array values for white balls
-        ///// </summary>
-        //private List<int> arrayValueForWhiteBall;
-        ///// <summary>
-        ///// Array values for red balls
-        ///// </summary>
-        //private List<int> arrayValueForRedBall;
+        /// <summary>
+        /// Count of chose white numbers
+        /// </summary>
+        private readonly int countChoseWhiteBalls;
         /// <summary>
         /// value of max multiplier
         /// </summary>
-        private int maxMultiplier;
+        private readonly int maxMultiplier;
         /// <summary>
         /// for get random numbers
         /// </summary>
@@ -47,13 +39,9 @@ namespace GameLogic
             set
             {
                 if (1 < value)
-                {
                     maxOfWhite = value;
-                }
                 else
-                {
-                    new Exception("Error of input value for max value white balls");
-                }
+                    _ = new Exception("Error of input value for max value white balls");
             }
         }
         /// <summary>
@@ -65,26 +53,11 @@ namespace GameLogic
             set
             {
                 if (1 < value)
-                {
                     maxOfRed = value;
-                }
                 else
-                {
-                    new Exception("Error of input value for max value red ball");
-                }
+                    _ = new Exception("Error of input value for max value red ball");
             }
         }
-
-        /// <summary>
-        /// Get sorted values for white balls
-        /// </summary>
-        private List<int> GetSortArrayForWhiteBall
-            => GetSortArray(MaxOfWhite);
-        /// <summary>
-        /// Get sorted values for red balls
-        /// </summary>
-        private List<int> GetSortArrayForRedBall
-            => GetSortArray(MaxOfRed);
 
         public PowerBallLogic()
         {
@@ -108,19 +81,11 @@ namespace GameLogic
         }
 
         /// <summary>
-        /// Get sorted array of integer values for balls
-        /// </summary>
-        /// <param name="number">max value of balls</param>
-        /// <returns></returns>
-        private List<int> GetSortArray(int number)
-            => Enumerable.Range(1, number + 1).ToList();
-
-        /// <summary>
         /// Return random values for autocomplate ticket
         /// </summary>
         /// <returns></returns>
         public KeyValuePair<int, List<int>> GetRandomValues()
-            => new KeyValuePair<int, List<int>>(GetRandomRedBall(), GetRandomWhiteBalls());
+            => new(GetRandomRedBall(), GetRandomWhiteBalls());
 
         /// <summary>
         /// Return random value for power play game
@@ -129,8 +94,8 @@ namespace GameLogic
         public int GetRandomMultiplier()
         {
             // create base list
-            List<int> array0 = new List<int>(),
-                array1 = new List<int>();
+            List<int> array0 = new(),
+                array1 = new();
 
             #region add elements (balls) for get multiplier
             // now moment hardcode for count of balls with different multiplier
@@ -196,8 +161,8 @@ namespace GameLogic
         private int GetRandomRedBall()
         {
             // create base list
-            List<int> array0 = new List<int>(),
-                array1 = new List<int>();
+            List<int> array0 = new(),
+                array1 = new();
 
             // add elements (balls) for get red ball
             array0.AddRange(Enumerable
@@ -237,9 +202,9 @@ namespace GameLogic
         private List<int> GetRandomWhiteBalls()
         {
             // create base list and list with array balls
-            List<int> array0 = new List<int>(),
-                array1 = new List<int>(),
-                result = new List<int>();
+            List<int> array0 = new(),
+                array1 = new(),
+                result = new();
 
             // add elements (balls) for get red ball
             array0.AddRange(Enumerable
@@ -320,13 +285,9 @@ namespace GameLogic
             set
             {
                 if (1 < value)
-                {
                     maxOfWhite = value;
-                }
                 else
-                {
-                    new Exception("Error of input value for max value white balls");
-                }
+                    _ = new Exception("Error of input value for max value white balls");
             }
         }
 
@@ -339,13 +300,9 @@ namespace GameLogic
             set
             {
                 if (1 < value)
-                {
                     maxOfRed = value;
-                }
                 else
-                {
-                    new Exception("Error of input value for max value red ball");
-                }
+                    _ = new Exception("Error of input value for max value red ball");
             }
         }
 
@@ -375,10 +332,7 @@ namespace GameLogic
                     whiteBalls.Sort();
                 }
                 else
-                {
-                    new Exception("Error of input values of white balls");
-                }
-
+                    _ = new Exception("Error of input values of white balls");
             }
         }
 
@@ -391,13 +345,9 @@ namespace GameLogic
             set
             {
                 if (1 <= value && value <= maxOfRed)
-                {
                     redBall = value;
-                }
                 else
-                {
-                    new Exception("Error of input values of red ball");
-                }
+                    _ = new Exception("Error of input values of red ball");
             }
         }
 
