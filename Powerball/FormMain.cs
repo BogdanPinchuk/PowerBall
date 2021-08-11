@@ -65,6 +65,10 @@ namespace Powerball
         /// random balls (red and white) for "Perform draw"
         /// </summary>
         private KeyValuePair<int, List<int>> randomBalls;
+        /// <summary>
+        /// new name table for simple access
+        /// </summary>
+        private readonly DataGridView table;
 
         /// <summary>
         /// Base logig of game
@@ -111,6 +115,12 @@ namespace Powerball
         {
             InitializeComponent();
 
+            // add link of table
+            table = dataGridViewRT;
+
+            // clear table
+            ClearOfTable();
+
             // auto-substitution values for customer ticket
             AutoGenerateTicketValues();
         }
@@ -132,6 +142,9 @@ namespace Powerball
             groupBoxPD.Enabled = true;
             groupBoxRT.Enabled = true;
 
+            // clear of table
+            ClearOfTable();
+
             // validate input values of money
             ValidateInputMoney(textBoxJ, minJackpot);   // jackpot
             ValidateInputMoney(textBoxM, 2);            // customer money
@@ -145,6 +158,61 @@ namespace Powerball
 
             // clear textbox
             ClearTextBoxOfLotеery();
+        }
+
+        /// <summary>
+        /// Clear all old register ticket
+        /// </summary>
+        private void ClearOfTable()
+        {
+            // clear all
+            table.Columns.Clear();
+            table.Rows.Clear();
+
+            // add columns and their names
+            {
+                // temp value
+                int i = 1;
+
+                // white balls
+                table.Columns.Add($"Column{i}", $"{i++}");
+                table.Columns.Add($"Column{i}", $"{i++}");
+                table.Columns.Add($"Column{i}", $"{i++}");
+                table.Columns.Add($"Column{i}", $"{i++}");
+                table.Columns.Add($"Column{i}", $"{i++}");
+                // red ball
+                table.Columns.Add($"Column{i++}", "PB");
+                // power play
+                table.Columns.Add(new DataGridViewCheckBoxColumn());
+                table.Columns[table.Columns.Count - 1].Name = $"Column{i++}";
+                table.Columns[table.Columns.Count - 1].HeaderText = "PP";
+                // win
+                table.Columns.Add($"Column{i}", "Win");
+            }
+
+            // formats of columns (format for BoxColumn will not affect) and readonly
+            for (int i = 1; i <= table.Columns.Count; i++)
+            {
+                if (table.Columns[$"Column{i}"] is DataGridViewTextBoxColumn)
+                {
+                    table.Columns[$"Column{i}"].DefaultCellStyle.Format = "N0";
+                    table.Columns[$"Column{i}"].ReadOnly = true;
+                }
+            }
+
+            // fix cells
+            //table.AutoResizeColumnHeadersHeight();
+            //table.AutoResizeColumns();
+            //table.AutoResizeRows();
+            //table.AutoResizeRowHeadersWidth(DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders);
+
+            // remove selection of table
+            table.ClearSelection();
+
+            // some parameters
+            table.AllowUserToAddRows = false;
+            table.AllowUserToDeleteRows = false;
+            table.AllowUserToOrderColumns = true;
         }
 
         /// <summary>
@@ -182,6 +250,9 @@ namespace Powerball
             // lock of game
             groupBoxPD.Enabled = false;
             groupBoxRT.Enabled = false;
+
+            // clear table
+            ClearOfTable();
         }
 
         /// <summary>
@@ -216,8 +287,6 @@ namespace Powerball
 
             if (buttonS.Text == "Start")
             {
-                // TODO: Clear of table
-
                 // get random values for wins balls
                 randomBalls = powerBall.GetRandomValues();
 
@@ -238,7 +307,8 @@ namespace Powerball
             }
             else
             {
-                // TODO: Calc winnings
+                // Calc winnings
+                ClearOfTable();
 
                 // clear values for powerball
                 for (int i = 0; i < textBoxes.Count; i++)
