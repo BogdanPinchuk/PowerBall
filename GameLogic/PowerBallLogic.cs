@@ -357,11 +357,11 @@ namespace GameLogic
             {
                 // we divide evently, without coins
                 long partJackpot = jackpot / countJackpoter;
-                winMoneys.ToList().ForEach(i =>
-                {
-                    if (i == jackpot)
-                        i = partJackpot;
-                });
+
+                // corected prizes
+                for (int i = 0; i < winMoneys.Length; i++)
+                    if (winMoneys[i] == jackpot)
+                        winMoneys[i] = partJackpot;
             }
 
             // save results, important to follow the order

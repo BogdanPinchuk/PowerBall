@@ -343,6 +343,18 @@ namespace Powerball
                 // clear list of registered tickets
                 tickets.Clear();
 
+                // if jackpot < $4, then we say you won all money
+                if (jackpot < 4)
+                {
+                    // show info
+                    statusLabelInfo.Text = $"You won all prizes. Game over.";
+                    return;
+                }
+
+                // update jackpot
+                powerBall = new(maxOfWhite, maxOfRed, MaxMultiplier,
+                    countChoseWhiteBalls, jackpot);
+
                 // clear values for powerball
                 for (int i = 0; i < textBoxes.Count; i++)
                     textBoxes[i].Text = string.Empty;
