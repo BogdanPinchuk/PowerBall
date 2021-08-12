@@ -49,66 +49,21 @@ namespace GameLogic.Test
     class Probability
     {
         /// <summary>
-        /// type of prizes (hard code), W - white, R - red balls
-        /// </summary>
-        enum TypePrizes
-        {
-            /// <summary>
-            /// 1-st - jackpot
-            /// </summary>
-            W5_R1,
-            /// <summary>
-            /// 2-nd - $1 million
-            /// </summary>
-            W5_R0,
-            /// <summary>
-            /// 3-rd - $50,000
-            /// </summary>
-            W4_R1,
-            /// <summary>
-            /// 4-th - $100
-            /// </summary>
-            W4_R0,
-            /// <summary>
-            /// 5-th - $100
-            /// </summary>
-            W3_R1,
-            /// <summary>
-            /// 6-th - $7
-            /// </summary>
-            W3_R0,
-            /// <summary>
-            /// 7-th - $7
-            /// </summary>
-            W2_R1,
-            /// <summary>
-            /// 8-th - $4
-            /// </summary>
-            W1_R1,
-            /// <summary>
-            /// 9-th - $4
-            /// </summary>
-            W0_R1,
-        }
-
-        /// <summary>
         /// Numner of maximum value for white balls
         /// </summary>
-        private int maxOfWhite;
+        private readonly int maxOfWhite;
         /// <summary>
         /// Numner of maximum value for red balls
         /// </summary>
-        private int maxOfRed;
+        private readonly int maxOfRed;
         /// <summary>
         /// Count of chose white numbers
         /// </summary>
-        private int countChoseWhiteBalls;
+        private readonly int countChoseWhiteBalls;
         /// <summary>
         /// Count of chose red numbers
         /// </summary>
-        private int countChoseRedBalls;
-
-        public Probability() { }
+        private readonly int countChoseRedBalls;
 
         /// <summary>
         /// Create instance
@@ -127,16 +82,49 @@ namespace GameLogic.Test
         }
 
         /// <summary>
-        /// General classical probability
+        /// Classical probability
         /// </summary>
         /// <param name="countWB">count needed white balls</param>
         /// <param name="countRB">count needed red balls</param>
-        /// <returns>count of combinations that can be</returns>
-        public long ClassicalProbability_General(int countWB, int countRB)
+        /// <returns>probability</returns>
+        public double ClassicalProbability(int countWB, int countRB)
         {
-            // all actives
-            long C_all_comb = CalcComb(countWB, maxOfWhite);
+            // all actives for white balls
+            double c_all_comb_w = CalcComb(countChoseWhiteBalls, maxOfWhite);
+            // all actives for red balls
+            double c_all_comb_r = CalcComb(countChoseRedBalls, maxOfRed);
 
+            // successfull choice for white balls
+            double c_positive_w = CalcComb(countWB, countChoseWhiteBalls);
+            // successfull choice for white balls
+            double c_positive_r = CalcComb(countRB, countChoseRedBalls);
+
+            // unsuccessfull choice for white balls
+            double c_negative_w = CalcComb(countChoseWhiteBalls - countWB,
+                maxOfWhite - countChoseWhiteBalls);
+            // unsuccessfull choice for white balls
+            double c_negative_r = CalcComb(countChoseRedBalls - countRB,
+                maxOfRed - countChoseRedBalls);
+
+            // probability of white balls
+            double p_w = c_positive_w * c_negative_w / c_all_comb_w;
+            // probability of red balls
+            double p_r = c_positive_r * c_negative_r / c_all_comb_r;
+
+            // general probability (this actives is independent)
+            return p_w * p_r;
+
+            // note: for better tollerancy we can use decimal type
+        }
+
+        /// <summary>
+        /// Freaquency probability
+        /// </summary>
+        /// <param name="countWB">count needed white balls</param>
+        /// <param name="countRB">count needed red balls</param>
+        /// <returns>probability</returns>
+        public double FreaquencyProbability(int countWB, int countRB)
+        {
             return default;
         }
 
@@ -146,7 +134,7 @@ namespace GameLogic.Test
         /// <param name="m">get elements</param>
         /// <param name="n">all elements</param>
         /// <returns>count of combitation</returns>
-        private long CalcComb(int m, int n)
+        private static double CalcComb(int m, int n)
         {
             // validate input data
             if (n < m)
@@ -179,10 +167,8 @@ namespace GameLogic.Test
                 product *= i;
 
             double down_part = (double)factorial.FactorialFast(m);
-
-            long result = (long)(product / down_part);
-
-            return result;
+            
+            return product / down_part;
         }
 
     }

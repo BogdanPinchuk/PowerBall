@@ -7,6 +7,49 @@ namespace GameLogic.Test
     [TestClass]
     public class GameLogic_Test
     {
+        /// <summary>
+        /// type of prizes (hard code), W - white, R - red balls
+        /// </summary>
+        enum TypePrizes
+        {
+            /// <summary>
+            /// 1-st - jackpot
+            /// </summary>
+            W5_R1,
+            /// <summary>
+            /// 2-nd - $1 million
+            /// </summary>
+            W5_R0,
+            /// <summary>
+            /// 3-rd - $50,000
+            /// </summary>
+            W4_R1,
+            /// <summary>
+            /// 4-th - $100
+            /// </summary>
+            W4_R0,
+            /// <summary>
+            /// 5-th - $100
+            /// </summary>
+            W3_R1,
+            /// <summary>
+            /// 6-th - $7
+            /// </summary>
+            W3_R0,
+            /// <summary>
+            /// 7-th - $7
+            /// </summary>
+            W2_R1,
+            /// <summary>
+            /// 8-th - $4
+            /// </summary>
+            W1_R1,
+            /// <summary>
+            /// 9-th - $4
+            /// </summary>
+            W0_R1,
+        }
+
         private Probability probability;
 
         /// <summary>
@@ -24,9 +67,9 @@ namespace GameLogic.Test
         public void Calc_Probability_AllPrizes()
         {
             // using Classical Probability
-            var a = probability.ClassicalProbability_General(5, 1);
+            var a = probability.ClassicalProbability(5, 1);
 
-            Trace.WriteLine(a);
+            Trace.WriteLine(1 / a);
         }
     }
 }
