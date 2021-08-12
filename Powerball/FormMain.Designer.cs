@@ -984,7 +984,7 @@ namespace Powerball
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.dataGridViewRT.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewRT.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewRT.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridViewRT.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
@@ -1036,6 +1036,7 @@ namespace Powerball
             this.Column1.HeaderText = "1";
             this.Column1.Name = "Column1";
             this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column1.Width = 19;
             // 
             // Column2
             // 
@@ -1045,6 +1046,7 @@ namespace Powerball
             this.Column2.HeaderText = "2";
             this.Column2.Name = "Column2";
             this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column2.Width = 19;
             // 
             // Column3
             // 
@@ -1054,6 +1056,7 @@ namespace Powerball
             this.Column3.HeaderText = "3";
             this.Column3.Name = "Column3";
             this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column3.Width = 19;
             // 
             // Column4
             // 
@@ -1063,6 +1066,7 @@ namespace Powerball
             this.Column4.HeaderText = "4";
             this.Column4.Name = "Column4";
             this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column4.Width = 19;
             // 
             // Column5
             // 
@@ -1072,6 +1076,7 @@ namespace Powerball
             this.Column5.HeaderText = "5";
             this.Column5.Name = "Column5";
             this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column5.Width = 19;
             // 
             // Column6
             // 
@@ -1080,11 +1085,13 @@ namespace Powerball
             this.Column6.HeaderText = "PB";
             this.Column6.Name = "Column6";
             this.Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column6.Width = 27;
             // 
             // Column7
             // 
             this.Column7.HeaderText = "PP";
             this.Column7.Name = "Column7";
+            this.Column7.Width = 27;
             // 
             // Column8
             // 
@@ -1094,6 +1101,7 @@ namespace Powerball
             this.Column8.HeaderText = "Win";
             this.Column8.Name = "Column8";
             this.Column8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column8.Width = 34;
             // 
             // FormMain
             // 

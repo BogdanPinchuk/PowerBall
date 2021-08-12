@@ -316,6 +316,23 @@ namespace Powerball
                 // present winnings tickets
                 PresentWinningsInTable();
 
+                #region payment prizes
+                // balanse of gamer and sum of prizes
+                long balanse = long.Parse(textBoxM.Text),
+                    sumPrizes = powerBall.WinMoneys.Sum();
+
+                // corected balance
+                balanse += sumPrizes;
+                jackpot -= sumPrizes;
+
+                // show info
+                statusLabelInfo.Text = $"You won prizes ${sumPrizes}. Your balanse is ${balanse}";
+
+                // corected balasnce and jackpot
+                textBoxM.Text = balanse.ToString();
+                textBoxJ.Text = jackpot.ToString();
+                #endregion
+                
                 buttonS.Text = "Next";
             }
             else
@@ -620,11 +637,15 @@ namespace Powerball
             {
                 // payment for ticket
                 balanse -= costWithPP;
+                // sent to jackpot
+                jackpot += costWithPP;
             }
             else if (balanse >= costWithOutPP && !tempTicket.PowerPlay)  // without powerplay
             {
                 // payment for ticket
                 balanse -= costWithOutPP;
+                // sent to jackpot
+                jackpot += costWithOutPP;
             }
             else
             {
@@ -642,14 +663,18 @@ namespace Powerball
             // create new tempTicket
             tempTicket = new(maxOfWhite, maxOfRed);
 
-            // update table
-            UpdateOfTable();
+            // update table, add optimization, because every time update all talbe is very slowly
+            if (tickets.Count <= 1)
+                UpdateOfTable();
+            else
+                CorectedOfTable();
 
             // show info
             statusLabelInfo.Text = $"You bought a ticket for ${textBoxCost.Text}. Your balanse is ${balanse}";
 
-            // corected balasnce
+            // corected balasnce and jackpot
             textBoxM.Text = balanse.ToString();
+            textBoxJ.Text = jackpot.ToString();
 
             // auto-substitution values for customer ticket
             AutoGenerateTicketValues();
@@ -713,6 +738,42 @@ namespace Powerball
             table.AllowUserToAddRows = false;
             table.AllowUserToDeleteRows = false;
             table.AllowUserToOrderColumns = true;
+        }
+
+        /// <summary>
+        /// Added new rows to table
+        /// </summary>
+        private void CorectedOfTable()
+        {
+            // add row to table
+            table.Rows.Add();
+
+            // number of row
+            int id = table.Rows.Count - 1;
+
+            // numeration of tickets
+            table.Rows[id].HeaderCell.Value = $"{id + 1}";
+
+            // write data
+            {
+                int j = 1;
+                // white balls
+                foreach (int value in tickets[id].WhiteBalls)
+                    table.Rows[id].Cells[$"Column{j++}"].Value = value;
+                // red ball
+                table.Rows[id].Cells[$"Column{j++}"].Value = tickets[id].RedBall;
+                // power play
+                table.Rows[id].Cells[$"Column{j++}"].Value = tickets[id].PowerPlay;
+            }
+
+            // fix cells
+            //table.AutoResizeColumnHeadersHeight();
+            table.AutoResizeColumns();
+            table.AutoResizeRows();
+            table.AutoResizeRowHeadersWidth(DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders);
+
+            // remove selection of table
+            table.ClearSelection();
         }
 
         /// <summary>
@@ -863,6 +924,8 @@ namespace Powerball
                     table.Rows[i].Cells[$"Column{++j}"].Value = tickets[i].PowerPlay;
                     // winning money
                     table.Rows[i].Cells[$"Column{++j}"].Value = powerBall.WinMoneys[i];
+                    if (powerBall.WinMoneys[i] > 0)
+                        table.Rows[i].Cells[$"Column{j}"].Style.BackColor = Color.Gold;
                 }
             }
 

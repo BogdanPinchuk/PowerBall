@@ -332,20 +332,23 @@ namespace GameLogic
             long[] winMoneys = new long[tickets.Count];
 
             // cheking to win, use multithreding for fast calculating
-            //Parallel.For(0, tickets.Count - 1, i =>
-            //{
-            //    tickets[i].ValidateTicket(win);
-            //    winValues[i] = tickets[i].ResultOfWin;
-            //    prizes[i] = AnalisysPrize(tickets[i].CountWhite, tickets[i].CountRed);
-            //    winMoneys[i] = ConvertPrizeIntoMoney(prizes[i], tickets[i].PowerPlay);
-            //});
+            Parallel.For(0, tickets.Count, i =>
+            {
+                winValues[i] = tickets[i].ValidateTicket(win);
+                prizes[i] = AnalisysPrize(tickets[i].CountWhite, tickets[i].CountRed);
+                winMoneys[i] = ConvertPrizeIntoMoney(prizes[i], tickets[i].PowerPlay);
+            });
 
+            #region old version
+            /*
             for (int i = 0; i < tickets.Count; i++)
             {
                 winValues[i] = tickets[i].ValidateTicket(win);
                 prizes[i] = AnalisysPrize(tickets[i].CountWhite, tickets[i].CountRed);
                 winMoneys[i] = ConvertPrizeIntoMoney(prizes[i], tickets[i].PowerPlay);
-            }
+            } 
+            */
+            #endregion
 
             // if we have more then 1 winners jackpot we mast divide on this count
             int countJackpoter = prizes.Where(i => i == 1).Count();
@@ -633,9 +636,8 @@ namespace GameLogic
             // checking white color
             List<bool> checkWC = new();
 
-            for (int i = 0; i < win.Count; i++)
-                checkWC.Add(cur.Contains(win[i]));
-                //checkWC.Add(win[i] == cur[i]);
+            for (int i = 0; i < cur.Count; i++)
+                checkWC.Add(win.Contains(cur[i]));
 
             // checking red color
             bool checkRC = winValues.Key == RedBall;
@@ -644,8 +646,6 @@ namespace GameLogic
             resultOfWin = new KeyValuePair<bool, List<bool>>(checkRC, checkWC);
 
             return resultOfWin;
-
-            // TODO: Corrected validator
         }
 
     }
