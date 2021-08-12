@@ -68,8 +68,11 @@ namespace GameLogic.Test
         {
             // using Classical Probability
             var a = probability.ClassicalProbability(5, 1);
+            // using Freaquency Probability
+            var b = probability.FreaquencyProbability(5, 1);
 
             Trace.WriteLine(1 / a);
+            Trace.WriteLine(1 / b);
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+
 using factorial = Factorial.Factorial;
 
 // Note: Пояснення на укр.мові щоб простіще було пояснити розбіжності і навести 2 різні варіанти
@@ -118,17 +119,6 @@ namespace GameLogic.Test
         }
 
         /// <summary>
-        /// Freaquency probability
-        /// </summary>
-        /// <param name="countWB">count needed white balls</param>
-        /// <param name="countRB">count needed red balls</param>
-        /// <returns>probability</returns>
-        public double FreaquencyProbability(int countWB, int countRB)
-        {
-            return default;
-        }
-
-        /// <summary>
         /// Calculate combinations
         /// </summary>
         /// <param name="m">get elements</param>
@@ -142,7 +132,7 @@ namespace GameLogic.Test
 
             // fast answer
             if (n == m)
-                return 1;
+                return 1.0;
 
             // other variants
             #region slow realization, because we have big number
@@ -161,14 +151,63 @@ namespace GameLogic.Test
                 .ToList();
 
             // product for up part, hope that values will be small
-            double product = 1;
+            double product = 1.0;
 
             foreach (var i in up_list)
                 product *= i;
 
             double down_part = (double)factorial.FactorialFast(m);
-            
+
             return product / down_part;
+        }
+
+        /// <summary>
+        /// Freaquency probability
+        /// </summary>
+        /// <param name="countWB">count needed white balls</param>
+        /// <param name="countRB">count needed red balls</param>
+        /// <returns>probability</returns>
+        public double FreaquencyProbability(int countWB, int countRB)
+        {
+            // list of white balls that remained
+            List<double> w_balls = Enumerable
+                .Range(1, countWB)
+                .Select(i => (double)(maxOfWhite - countWB + i))
+                .ToList();
+            // list of red balls witch remained
+            List<double> r_balls = Enumerable
+                .Range(1, countRB)
+                .Select(i => (double)(maxOfRed - countRB + i))
+                .ToList();
+
+            // list of count winning white balls that remained
+            List<double> ww_balls = Enumerable
+                .Range(1, countWB)
+                .Select(i => (double)i)
+                .ToList();
+            // list of count winning red balls that remained
+            List<double> rw_balls = Enumerable
+                .Range(1, countRB)
+                .Select(i => (double)i)
+                .ToList();
+
+            // calc freaquency singed win white balls
+            double wf_ball = 1.0;
+
+            for (int i = 0; i < w_balls.Count; i++)
+                wf_ball *= ww_balls[i] / w_balls[i];
+            //var a = ww_balls[i];
+            //var b = w_balls[i];
+            //var c = a / b;
+
+            // calc freaquency singed win red balls
+            double rf_ball = 1.0;
+
+            for (int i = 0; i < r_balls.Count; i++)
+                rf_ball *= rw_balls[i] / r_balls[i];
+
+            // general probability (this actives is independent)
+            return wf_ball * rf_ball;
         }
 
     }
