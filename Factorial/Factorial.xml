@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Factorial</name>
+    </assembly>
+    <members>
+        <member name="T:Factorial.Factorial">
+            <summary>
+            Factorial number
+            </summary>
+        </member>
+        <member name="M:Factorial.Factorial.FactorialPow(System.UInt32)">
+            <summary>
+            Ramanujan approximation power formula
+            </summary>
+            <param name="n">value</param>
+            <returns>Factorial number</returns>
+        </member>
+        <member name="M:Factorial.Factorial.FactorialPow(System.UInt32[])">
+            <summary>
+            Ramanujan approximation power formula
+            </summary>
+            <param name="array">array value</param>
+            <returns>array Factorial number</returns>
+        </member>
+        <member name="M:Factorial.Factorial.FactorialPow_Par(System.UInt32[])">
+            <summary>
+            Ramanujan approximation power formula using parallel calculations
+            </summary>
+            <param name="array">array value</param>
+            <returns>array Factorial number</returns>
+        </member>
+        <member name="M:Factorial.Factorial.FactorialExp(System.UInt32)">
+            <summary>
+            Ramanujan approximation exponent formula
+            </summary>
+            <param name="n">value</param>
+            <returns>Factorial number</returns>
+        </member>
+        <member name="M:Factorial.Factorial.FactorialExp(System.UInt32[])">
+            <summary>
+            Ramanujan approximation exponent formula
+            </summary>
+            <param name="array">array value</param>
+            <returns>array Factorial number</returns>
+        </member>
+        <member name="M:Factorial.Factorial.FactorialExp_Par(System.UInt32[])">
+            <summary>
+            Ramanujan approximation exponent formula using parallel calculations
+            </summary>
+            <param name="array">array value</param>
+            <returns>array Factorial number</returns>
+        </member>
+        <member name="M:Factorial.Factorial.FactorialSlow(System.UInt32)">
+            <summary>
+            Slow calculate but accurate result, can calculate absolute value more then 11
+            </summary>
+            <param name="n">value</param>
+            <returns>Factorial number</returns>
+        </member>
+        <member name="M:Factorial.Factorial.FactorialSlow(System.Numerics.BigInteger)">
+            <summary>
+            Slow calculate but accurate result, can calculate absolute value more then 11
+            </summary>
+            <param name="n">value</param>
+            <returns>Factorial number</returns>
+        </member>
+        <member name="M:Factorial.Factorial.FactorialFast(System.UInt32)">
+            <summary>
+            Fast calculate but accurate result, can calculate absolute value more then 11
+            </summary>
+            <param name="n">value</param>
+            <returns>Factorial number</returns>
+        </member>
+        <member name="M:Factorial.Factorial.FactorialFast(System.Numerics.BigInteger)">
+            <summary>
+            Fast calculate but accurate result, can calculate absolute value more then 11
+            </summary>
+            <param name="n">value</param>
+            <returns>Factorial number</returns>
+        </member>
+    </members>
+</doc>
