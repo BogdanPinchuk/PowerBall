@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Math 2\Factorial\Factorial.csproj" />
+    <ProjectReference Include="..\Factorial\Factorial.csproj" />
     <ProjectReference Include="..\GameLogic\GameLogic.csproj" />
   </ItemGroup>
 
