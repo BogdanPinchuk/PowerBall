@@ -3,6 +3,8 @@
 // 2. https://uk.wikipedia.org/wiki/Факторіал
 // 3. https://en.wikipedia.org/wiki/Gamma_function
 // 4. https://uk.wikipedia.org/wiki/Гамма-функція
+
+// this realization present: https://github.com/BogdanPinchuk/Factorial
 #endregion
 
 using System;
