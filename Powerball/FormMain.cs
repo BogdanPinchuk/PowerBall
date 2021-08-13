@@ -453,7 +453,6 @@ namespace Powerball
 
             // save data in temp variable
             tempTicket.ChangeTicket(randomBalls.Value, randomBalls.Key, checkBoxPP1.Checked);
-            tempTicket.PowerPlay = checkBoxPP1.Checked;
         }
 
         /// <summary>

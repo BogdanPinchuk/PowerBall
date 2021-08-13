@@ -317,26 +317,26 @@ namespace GameLogic
         /// <summary>
         /// Cheking bought tikets to win
         /// </summary>
-        /// <param name="tickets">bought tickets</param>
+        /// <param name="ticket">bought tickets</param>
         /// <param name="win">winning ticket/combination</param>
-        public void CheckingTickets(List<Ticket> tickets, KeyValuePair<int, List<int>> win)
+        public void CheckingTickets(List<Ticket> ticket, KeyValuePair<int, List<int>> win)
         {
             // temp array for to follow the order, because if important
 
             // result of every values
             KeyValuePair<bool, List<bool>>[] winValues =
-                new KeyValuePair<bool, List<bool>>[tickets.Count];
+                new KeyValuePair<bool, List<bool>>[ticket.Count];
             // prizes
-            int[] prizes = new int[tickets.Count];
+            int[] prizes = new int[ticket.Count];
             // winning moneys
-            long[] winMoneys = new long[tickets.Count];
+            long[] winMoneys = new long[ticket.Count];
 
             // cheking to win, use multithreding for fast calculating
-            Parallel.For(0, tickets.Count, i =>
+            Parallel.For(0, ticket.Count, i =>
             {
-                winValues[i] = tickets[i].ValidateTicket(win);
-                prizes[i] = AnalisysPrize(tickets[i].CountWhite, tickets[i].CountRed);
-                winMoneys[i] = ConvertPrizeIntoMoney(prizes[i], tickets[i].PowerPlay);
+                winValues[i] = ticket[i].ValidateTicket(win);
+                prizes[i] = AnalisysPrize(ticket[i].CountWhite, ticket[i].CountRed);
+                winMoneys[i] = ConvertPrizeIntoMoney(prizes[i], ticket[i].PowerPlay);
             });
 
             #region old version
@@ -368,6 +368,38 @@ namespace GameLogic
             this.winValues = winValues.ToList();
             this.prizes = prizes.ToList();
             this.winMoneys = winMoneys.ToList();
+        }
+
+        /// <summary>
+        /// Cheking bought tiket to win
+        /// </summary>
+        /// <param name="ticket">bought ticket</param>
+        /// <param name="win">winning ticket/combination</param>
+        public void CheckingTicket(Ticket ticket, KeyValuePair<int, List<int>> win)
+        {
+            // temp array for to follow the order, because if important
+
+            // result of every values
+            KeyValuePair<bool, List<bool>> winValues = new();
+            // prizes
+            int prize = 0;
+            // winning moneys
+            long winMoney = 0;
+
+            // cheking to win, use multithreding for fast calculating
+            winValues = ticket.ValidateTicket(win);
+            prize = AnalisysPrize(ticket.CountWhite, ticket.CountRed);
+            winMoney = ConvertPrizeIntoMoney(prize, ticket.PowerPlay);
+
+            // clear
+            this.winValues.Clear();
+            this.prizes.Clear();
+            this.winMoneys.Clear();
+
+            // save results, important to follow the order
+            this.winValues.Add(winValues);
+            this.prizes.Add(prize);
+            this.winMoneys.Add(winMoney);
         }
 
         /// <summary>
