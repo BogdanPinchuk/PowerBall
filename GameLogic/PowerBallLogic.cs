@@ -378,18 +378,14 @@ namespace GameLogic
         public void CheckingTicket(Ticket ticket, KeyValuePair<int, List<int>> win)
         {
             // temp array for to follow the order, because if important
+            // cheking to win, use multithreding for fast calculating
 
             // result of every values
-            KeyValuePair<bool, List<bool>> winValues = new();
+            var winValues = ticket.ValidateTicket(win);
             // prizes
-            int prize = 0;
+            var prize = AnalisysPrize(ticket.CountWhite, ticket.CountRed);
             // winning moneys
-            long winMoney = 0;
-
-            // cheking to win, use multithreding for fast calculating
-            winValues = ticket.ValidateTicket(win);
-            prize = AnalisysPrize(ticket.CountWhite, ticket.CountRed);
-            winMoney = ConvertPrizeIntoMoney(prize, ticket.PowerPlay);
+            var winMoney = ConvertPrizeIntoMoney(prize, ticket.PowerPlay);
 
             // clear
             this.winValues.Clear();
