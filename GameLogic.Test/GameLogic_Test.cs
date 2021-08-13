@@ -212,6 +212,10 @@ namespace GameLogic.Test
                 // analisys of ticket
                 powerBall.CheckingTicket(ticket, randomBalls);
 
+                // return objects
+                poolGame.Return(powerBall);
+                poolTicket.Return(ticket);
+
                 // save data
                 prizesData[powerBall.Prizes[0]] += 1;
             });
