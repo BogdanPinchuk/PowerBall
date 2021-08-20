@@ -62,7 +62,7 @@ namespace GameLogic
                 if (1 < value)
                     maxOfWhite = value;
                 else
-                    _ = new Exception("Error of input value for max value white balls");
+                    throw new Exception("Error of input value for max value white balls");
             }
         }
         /// <summary>
@@ -76,7 +76,7 @@ namespace GameLogic
                 if (1 < value)
                     maxOfRed = value;
                 else
-                    _ = new Exception("Error of input value for max value red ball");
+                    throw new Exception("Error of input value for max value red ball");
             }
         }
         /// <summary>
@@ -530,7 +530,7 @@ namespace GameLogic
                 if (1 < value)
                     maxOfWhite = value;
                 else
-                    _ = new Exception("Error of input value for max value white balls");
+                    throw new Exception("Error of input value for max value white balls");
             }
         }
         /// <summary>
@@ -544,7 +544,7 @@ namespace GameLogic
                 if (1 < value)
                     maxOfRed = value;
                 else
-                    _ = new Exception("Error of input value for max value red ball");
+                    throw new Exception("Error of input value for max value red ball");
             }
         }
         /// <summary>
@@ -573,7 +573,7 @@ namespace GameLogic
                     whiteBalls.Sort();
                 }
                 else
-                    _ = new Exception("Error of input values of white balls");
+                    throw new Exception("Error of input values of white balls");
             }
         }
 
@@ -588,7 +588,7 @@ namespace GameLogic
                 if (1 <= value && value <= maxOfRed)
                     redBall = value;
                 else
-                    _ = new Exception("Error of input values of red ball");
+                    throw new Exception("Error of input values of red ball");
             }
         }
 
